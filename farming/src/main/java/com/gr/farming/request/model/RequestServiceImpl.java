@@ -48,23 +48,33 @@ public class RequestServiceImpl implements RequestService{
 }
 
 	@Override
-	public List<Map<String, Object>> selectReceivedRequest(int expertNo) {
-		return requestDao.selectReceivedRequest(expertNo);
-	}
-
-	@Override
-	public List<Map<String, Object>> selectRequestDetail1(FieldSearchVO vo) {
-		return requestDao.selectRequestDetail1(vo);
-	}
-	
-	@Override
-	public List<Map<String, Object>> selectRequestDetail2(FieldSearchVO vo) {
-		return requestDao.selectRequestDetail2(vo);
+	public RequestVO selectReceivedRequest(int requestNo) {
+		return requestDao.selectReceivedRequest(requestNo);
 	}
 
 	@Override
 	public int selectTotalRecord(FieldSearchVO vo) {
 		return requestDao.selectTotalRecord(vo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectRequestList1(FieldSearchVO vo) {
+		return requestDao.selectRequestList1(vo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectRequestList2(FieldSearchVO vo) {
+		return requestDao.selectRequestList2(vo);
+	}
+
+	@Override
+	public Map<String, Object> selectRequestDetail1(RequestVO vo) {
+		return requestDao.selectRequestDetail1(vo);
+	}
+
+	@Override
+	public Map<String, Object> selectRequestDetail2(RequestVO vo) {
+		return requestDao.selectRequestDetail2(vo);
 	}
 
 

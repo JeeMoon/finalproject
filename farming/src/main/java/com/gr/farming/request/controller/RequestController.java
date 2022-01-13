@@ -176,7 +176,7 @@ public class RequestController {
 		
 		List<FieldDetailVO> fieldList=findExpService.selectFieldDetail(expertNo);
 		
-		List<Map<String, Object>> list=requestService.selectRequestDetail1(fieldSearchVo);
+		List<Map<String, Object>> list=requestService.selectRequestList1(fieldSearchVo);
 		logger.info("받은 요청 목록 조회 detail={}, list.size={}", fieldSearchVo.getDetail(),list.size());
 		
 		int totalRecord=requestService.selectTotalRecord(fieldSearchVo);
@@ -194,9 +194,29 @@ public class RequestController {
 	}
 	
 	@RequestMapping("/finalRequest")
-	public String sendFinalRequest() {
+	public String sendFinalRequest(@RequestParam(defaultValue="0") int requestNo,
+			 HttpSession session, Model model) {
+		int expertNo=(int) session.getAttribute("userNo");
 		
-		logger.info("견적 보내기 페이지 ");
+		logger.info("견적 보내기 페이지, 파라미터 requestNo={} ", requestNo);
+		
+		RequestVO vo=requestService.selectReceivedRequest(requestNo);
+		logger.info("해당 견적정보 - vo={}", vo);
+		
+		int develop=vo.getRequestDevelopNo();
+		int design=vo.getRequestDesignNo();
+		vo.setExpertNo(expertNo);
+		Map<String, Object> map=null;
+		if(develop!=0) {
+			map=requestService.selectRequestDetail1(vo);
+		}else if(design!=0) {
+			map=requestService.selectRequestDetail2(vo);
+		}
+		logger.info("해당 견적정보 출력 - map={}", map);
+		List<Map<String, Object>> qList=requestService.selectQuestion(vo.getCategoryNo());
+		
+		model.addAttribute("map", map);
+		model.addAttribute("qList", qList);
 		
 		return "/request/finalRequest";
 		

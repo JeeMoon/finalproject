@@ -23,7 +23,10 @@ public class MvcConfiguration implements WebMvcConfigurer {
 		 .addPathPatterns("/expert/mypage/*", "/expert/addExp/*");
 		 
 		 registry.addInterceptor(new ExpLoginInterceptor())
-		 .addPathPatterns("/request/requestByClient", "/request/requestByExpert*");
+		 .addPathPatterns("/request/**", "/request/**");
+		 
+		 registry.addInterceptor(new ExpLoginInterceptor())
+		 .addPathPatterns("/findexp/expDetailEdit");
 		
 //		registry.addInterceptor(new AdminLoginInterceptor())
 //		.excludePathPatterns("/admin/login/adminLogin.do")

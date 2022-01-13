@@ -29,7 +29,6 @@
             	<option>추가정보를 등록하세요</option>
             </c:if>
             <c:if test="${!empty fieldList}">
-	            <option value="${fieldSearchVo.detail }">${fieldSearchVo.detail }   </option>
 	            <c:forEach var="fieldvo" items="${fieldList }">
 	              <option value="${fieldvo.detail }">${fieldvo.detail }   </option>
 	            </c:forEach>
@@ -47,7 +46,7 @@
         <div class="list-group shadow mb-5">
 		  <c:if test="${!empty list }">
         	<c:forEach var="map" items="${list }">
-	        	<a class="list-group-item list-group-item-action p-4" href="<c:url value='/request/finalRequest'/>">
+	        	<a class="list-group-item list-group-item-action p-4" href="<c:url value='/request/finalRequest?requestNo=${map[\'REQUEST_NO\'] }'/>">
 	            <div class="row">
 	              <div class="col-lg-3 align-self-center mb-4 mb-lg-0">
 	                <div class="d-flex align-items-center mb-3">

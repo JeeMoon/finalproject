@@ -1,170 +1,76 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ include file="../inc/top.jsp"%>
-<style>
-
-.file-uploader{
-	margin: 0;
-    position: relative;
-    border-radius: 0.5rem;
-    border: 0.0625rem solid #f2f2f2;
-    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGcgZmlsbD0iI0I1QjVCNSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNOSAwaDJ2MjBIOXoiLz48cGF0aCBkPSJNMCAxMVY5aDIwdjJ6Ii8+PC9nPjwvc3ZnPg==) no-repeat 50%,#f2f2f2;
-    cursor: pointer;
-}
-
-.file-uploader > .slot-content{
-	overflow: hidden;
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    border-radius: 8px;
-    transition: background .2s ease-in-out;
-	overflow: hidden;
-    position: absolute;
-    z-index: 2;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    display: flex;
-    border-radius: 8px;
-    transition: background .2s ease-in-out;
-}
-
-.file-uploader > .file-uploader-input{
-	position: absolute;
-    z-index: 2;
-    width: 100%;
-    top: 0;
-    right: 0;
-    bottom: 0;
-    left: 0;
-    opacity: 0;
-    cursor: pointer;
-}
-.input-price-group {
-    width: 17.75rem;
-    margin: 0 auto;
-    position: relative;
-}
-.input-price-group .input-group {
-    align-items: center;
-}
-.input-group {
-    position: relative;
-    display: flex;
-    flex-wrap: wrap;
-    align-items: stretch;
-    width: 100%;
-}
-.input-group>.custom-select:not(:last-child), .input-group>.form-control:not(:last-child) {
-    border-top-right-radius: 0;
-    border-bottom-right-radius: 0;
-}
-.input-price {
-    width: 100%;
-    padding: 0.6875rem 0.5rem 0.6875rem 1.4375rem;
-    font-size: 2.125rem;
-    font-weight: 500;
-    text-align: right;
-    border-radius: 0;
-    border: 0;
-}
-.input-validate-border {
-    position: absolute;
-    left: 0;
-    bottom: 0;
-    width: 100%;
-    height: 0;
-    background: none;
-    border: 0;
-    border-bottom: 0.0625rem solid #e1e1e1;
-    margin: 0;
-    z-index: 3;
-    transition: border-color .15s ease-in-out;
-}
-.input-price-group .input-group-append {
-    pointer-events: none;
-}
-.input-group-append {
-    height: 100%;
-    padding-right: 1.5rem;
-    padding-bottom: 0.0625rem;
-}
-.input-group-text {
-    display: flex;
-    align-items: center;
-    padding: 0.6875rem 1rem;
-    margin-bottom: 0;
-    font-size: 1rem;
-    font-weight: 400;
-    line-height: 1.5;
-    color: #323232;
-    text-align: center;
-    white-space: nowrap;
-    background-color: #f2f2f2;
-    border: 0.0625rem solid #e1e1e1;
-    border-radius: 0.25rem;
-}
-
-.input-group-text {
-    padding: 0;
-    font-size: 2.125rem;
-    font-weight: 500;
-    background: none;
-    border: none;
-}
-</style>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/request.css">
 <div class="container-fluid">               
       <div class="row">
         <div class="col-lg-4 col-xl-3 px-4 py-5 ps-xl-5 pe-xl-5">
-          <!-- Breadcrumbs -->
-          <ol class="breadcrumb ps-0  justify-content-start">
-            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
-            <li class="breadcrumb-item"><a href="user-grid.html">받은 요청</a></li>
-            <li class="breadcrumb-item active">견적보내기  </li>
-          </ol>
           <div class="text-block">
 	          <div class="d-flex align-items-center justify-content-between mb-3">
 	          <div>
-	            <h3>회원이름</h3>
-	            <p class="text-muted mb-0">2022-01-22 </p>
+	            <h3>${map['NAME'] }</h3>
+	            <p class="text-muted mb-0">${map['SEND_TIME'] }</p>
 	           </div>
-	            <img class="avatar avatar-lg p-1 flex-shrink-0 ms-4" src="${pageContext.request.contextPath }/resources/img/avatar/avatar-10.jpg" alt="Jack London">
+	            <img class="avatar avatar-lg p-1 flex-shrink-0 ms-4" src="${pageContext.request.contextPath }/resources/userImg/${map['FILENAME'] }" alt="profile">
             </div>
           </div>
           <div class="text-block">
             <div class="row">
               <div class="col-sm">
                 <h6>지역</h6>
-                <p class="text-muted">Ap #867, 859 Sit Rd., London</p>
+                <p class="text-muted">${map['LOCATION1'] } ${map['LOCATION2'] }</p>
               </div>
               <div class="col-sm">
                 <h6>분야</h6>
-                <p class="text-muted">+421 454 897 545</p>
+                <p class="text-muted">${map['DETAIL'] }</p>
               </div>
             </div>
           </div>
           <div class="text-block">
-            <h6 class="mb-3">Who's coming</h6>
-            <div class="row mb-3">
-              <div class="col-auto text-center text-sm"><img class="avatar avatar-border-white mb-1" src="${pageContext.request.contextPath }/resources/img/avatar/avatar-0.jpg" alt="Ondrej"><br>Ondrej</div>
-              <div class="col-auto text-center text-sm"><img class="avatar avatar-border-white mb-1" src="${pageContext.request.contextPath }/resources/img/avatar/avatar-1.jpg" alt="Julie"><br>Julie</div>
-              <div class="col-auto text-center text-sm"><img class="avatar avatar-border-white mb-1" src="${pageContext.request.contextPath }/resources/img/avatar/avatar-2.jpg" alt="Barbora"><br>Barbora</div>
-            </div>
-          </div>
-          <div class="text-block">
-            <div class="row">
+            <div class="row pb-2">
               <div class="col">
-                <h6> Total cost</h6>
-                <p class="text-muted">$499.50</p>
+                <h6>어떤 플랫폼을 원하시나요?</h6>
+                <p class="text-muted">${map['PLATFORM'] }</p>
               </div>
-              <div class="col align-self-center">
-                <p class="text-end d-print-none"><a class="btn btn-link text-muted" href="user-invoice.html"><i class="far fa-file me-2"></i>Your invoice</a></p>
+            </div>
+            <div class="row pb-2">
+              <div class="col">
+                <h6>어떤 종류의 개발을 원하시나요?</h6>
+                <p class="text-muted">${map['TYPE'] }</p>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <div class="col">
+                <h6>원하는 숙련도의 개발자가 있으신가요?</h6>
+                <p class="text-muted">${map['CAREER'] }</p>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <div class="col">
+                <h6>기획은 어느정도 되어있나요?</h6>
+                <p class="text-muted">${map['STEP'] }</p>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <div class="col ">
+                <h6>참고사항</h6>
+                <p class="text-muted">${map['REFERENCE'] }</p>
+                <c:if test="${map['REFERENCE']==null }">
+	                <p class="text-muted">없음</p>
+                </c:if>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <div class="col">
+                <h6>언제까지 작업이 완료되어야 하나요?</h6>
+                <p class="text-muted">${map['DEADLINE'] }</p>
+              </div>
+            </div>
+            <div class="row pb-2">
+              <div class="col">
+                <h6>어떻게 진행하기 원하시나요?</h6>
+                <p class="text-muted">${map['WORKTYPE'] }</p>
               </div>
             </div>
           </div>
