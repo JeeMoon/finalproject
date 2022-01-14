@@ -22,7 +22,8 @@ public class ExpertInfoVO {
 	private String taxInvoice; /* 세금계산서 발행여부 */
 	private String imageVideo; /* 이미지, 동영상 파일 이름 */
 	private String portfolio;  /* 포트폴리오 링크 */
-	private float reviewRate; /* 후기 별점 */
+	private int empCount; /* 고용된 횟수 */
+	private float rate; /* 별점 평균 */
 	
 	@Override
 	public String toString() {
@@ -30,8 +31,8 @@ public class ExpertInfoVO {
 				+ expertNo + ", intro=" + intro + ", detailInfo=" + detailInfo + ", career=" + career + ", staff="
 				+ staff + ", certification=" + certification + ", contactTime=" + contactTime + ", payMethod="
 				+ payMethod + ", businessLicense=" + businessLicense + ", license=" + license + ", taxInvoice="
-				+ taxInvoice + ", imageVideo=" + imageVideo + ", portfolio=" + portfolio + ", reviewRate=" + reviewRate
-				+ "]";
+				+ taxInvoice + ", imageVideo=" + imageVideo + ", portfolio=" + portfolio + ", empCount=" + empCount
+				+ ", rate=" + rate + "]";
 	}
 	
 }
