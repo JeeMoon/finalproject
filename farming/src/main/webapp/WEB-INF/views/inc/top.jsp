@@ -124,7 +124,7 @@
 								<li class="nav-item dropdown ms-2">
 									<a id="docsDropdownMenuLink"
 								data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-								<img class="avatar avatar-sm avatar-border-white ms-3" style="margin-right:1.3rem"
+								<img class="avatar avatar-sm avatar-border-white ms-2" style="margin-right:1.3rem"
 										src="${pageContext.request.contextPath }/resources/userImg/${userImg}"></a>
 								<!-- 프로필 이미지로 변경예정 -->
 								<div class="dropdown-menu dropdown-menu-end" aria-labelledby="docsDropdownMenuLink">
@@ -145,7 +145,7 @@
 								<li class="nav-item dropdown ms-1">
 									<a  id="docsDropdownMenuLink"
 								data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-									<img class="avatar avatar-sm avatar-border-white ms-3" style="margin-right:1.3rem"
+									<img class="avatar avatar-sm avatar-border-white ms-2" style="margin-right:1.3rem"
 										src="${pageContext.request.contextPath }/resources/userImg/${userImg}"></a>
 								<!-- 프로필 이미지로 변경예정 -->
 									<div class="dropdown-menu dropdown-menu-end" aria-labelledby="docsDropdownMenuLink">
