@@ -28,5 +28,16 @@ public class SearchController {
 		return "search/main";
 	}
 	
+	@RequestMapping("/dev")
+	public String dev() {
+		logger.info("dev");
+		return "search/dev";
+	}
+	@RequestMapping("/design")
+	public String design() {
+		logger.info("design");
+		return "search/design";
+	}
+	
 	
 }
