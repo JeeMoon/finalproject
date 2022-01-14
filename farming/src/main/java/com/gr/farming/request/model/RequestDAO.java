@@ -30,4 +30,12 @@ public interface RequestDAO {
 	
 	int selectTotalRecord(FieldSearchVO vo);
 	
+	//최종 견적 작성(전문가)
+	int insertFinalRequest(FinalRequestVO vo);
+	int updateMatchA(int requestNo);
+	int updateMatchY(int requestNo);
+	
+	//받은 견적 조회(회원)
+	FinalRequestVO selectFinalRequest(int memberNo);
+	
 }

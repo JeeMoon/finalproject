@@ -21,17 +21,15 @@ public class MvcConfiguration implements WebMvcConfigurer {
 		 .addPathPatterns("/chat/*", "/member/mypage/*", "/qna/qnaList");
 		 
 		 registry.addInterceptor(new ExpLoginInterceptor())
-<<<<<<< HEAD
+
 		 .addPathPatterns("/expert/mypage/*", "/expert/addExp/*");
 		 
 		 registry.addInterceptor(new ExpLoginInterceptor())
 		 .addPathPatterns("/request/**", "/request/**");
 		 
 		 registry.addInterceptor(new ExpLoginInterceptor())
-		 .addPathPatterns("/findexp/expDetailEdit");
-=======
-		 .addPathPatterns("/expert/mypage/*", "/expert/addExp/*", "/request/requestByClient", "/request/requestByExpert*");
->>>>>>> branch 'master' of https://github.com/ziwooooo/Farming.git
+		 .addPathPatterns("/findexp/expDetailEdit", "/expert/mypage/*", "/expert/addExp/*");
+
 		
 	}
 

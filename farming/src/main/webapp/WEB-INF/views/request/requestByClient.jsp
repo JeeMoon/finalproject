@@ -73,8 +73,18 @@
 	                    </p>
 	                  </div>
 	                  <div class="col-12 col-lg-2 align-self-center">
-	                  	<span class="text-primary text-sm text-uppercase me-4 me-lg-0">
-	                  		<i class="fa fa-check fa-fw me-2"> </i>견적서 보냄</span>
+	                  	<c:if test="${map['MATCH'] =='Y'}">
+	                  		<span class="text-primary text-sm text-uppercase me-4 me-lg-0">
+	                  			<i class="far fa-comment-dots fa-fw me-1"> </i>채팅 중</span>
+	                  	</c:if>
+	                  	<c:if test="${map['MATCH'] =='A'}">
+	                  		<span class="text-primary text-sm text-uppercase me-4 me-lg-0">
+	                  			<i class="fa fa-check fa-fw me-1"> </i>견적서 발송</span>
+	                  	</c:if>
+	                  	<c:if test="${map['MATCH'] =='N'}">
+	                  		<span class="text-muted text-sm text-uppercase me-4 me-lg-0">
+	                  			<i class="fas fa-pen fa-fw me-1"> </i>견적서 작성</span>
+	                  	</c:if>
 	                  </div>
 	                </div>
 	              </div>

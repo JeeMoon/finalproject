@@ -82,8 +82,40 @@
 		where expert_no=#{userNo}
 		<if test="detail!=null and detail!=''">
 			and detail=#{detail}
-			<!-- 파라미터 하나인데 타입 string 안됨, 
-			동적sql에서는 string, int 불가, vo, map만 가능 -->
 		</if> 
+	</select>
+	
+	<!-- 최종견적 작성 -->
+	<insert id="insertFinalRequest" parameterType="finalRequestVo">
+		<selectKey keyProperty="finalRequestNo" resultType="int" order="BEFORE">
+			select FINAL_REQ_SEQ.nextval from dual
+		</selectKey>
+		insert into FINAL_REQUEST(FINAL_REQUEST_NO, CATEGORY_NO, MEMBER_NO, EXPERT_NO,
+			REQUEST_NO, COST, TYPE, EXPLAIN, FILENAME,
+			ORIGINAL_FILENAME, FILESIZE)
+		values(#{finalRequestNo}, #{categoryNo}, #{memberNo}, #{expertNo}, 
+			#{requestNo}, #{cost}, #{type}, 
+			#{explain}, #{filename}, #{originalFilename}, #{filesize})
+	</insert>
+	
+	<!-- 최종견적 작성 후 매칭결과 변경 
+		A : 최종견적 발송됨
+		Y : 결제 완료
+	 -->
+	<update id="updateMatchA" parameterType="int">
+		update request
+		set match='A'
+		where request_no=#{requestNo}
+	</update>
+	<update id="updateMatchY" parameterType="int">
+		update request
+		set match='Y'
+		where request_no=#{requestNo}
+	</update>
+	
+	<!-- 일반회원의 받은 견적 조회 -->
+	<select id="selectFinalRequest" parameterType="int" resultType="finalRequestVo">
+		select * from final_request
+		where member_no=#{memberNo}
 	</select>
 </mapper>

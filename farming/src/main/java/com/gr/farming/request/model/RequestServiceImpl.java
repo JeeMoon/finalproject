@@ -77,6 +77,26 @@ public class RequestServiceImpl implements RequestService{
 		return requestDao.selectRequestDetail2(vo);
 	}
 
+	@Override
+	public int insertFinalRequest(FinalRequestVO vo) {
+		return requestDao.insertFinalRequest(vo);
+	}
+
+	@Override
+	public int updateMatchA(int requestNo) {
+		return requestDao.updateMatchA(requestNo);
+	}
+
+	@Override
+	public int updateMatchY(int requestNo) {
+		return requestDao.updateMatchY(requestNo);
+	}
+
+	@Override
+	public FinalRequestVO selectFinalRequest(int memberNo) {
+		return requestDao.selectFinalRequest(memberNo);
+	}
+
 
 
 	

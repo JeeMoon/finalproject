@@ -1,9 +1,11 @@
 package com.gr.farming.request.controller;
 
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
 import org.slf4j.Logger;
@@ -21,11 +23,13 @@ import com.gr.farming.category.model.CategoryService;
 import com.gr.farming.category.model.CategoryVO;
 import com.gr.farming.common.ConstUtil;
 import com.gr.farming.common.FieldSearchVO;
+import com.gr.farming.common.FileUploadUtil;
 import com.gr.farming.common.PaginationInfo;
 import com.gr.farming.common.SearchVO;
 import com.gr.farming.field.model.FieldDetailVO;
 import com.gr.farming.findExp.model.FindExpService;
 import com.gr.farming.member.model.MemberService;
+import com.gr.farming.request.model.FinalRequestVO;
 import com.gr.farming.request.model.RequestDesignVO;
 import com.gr.farming.request.model.RequestDevelopVO;
 import com.gr.farming.request.model.RequestQnaVO;
@@ -43,14 +47,16 @@ public class RequestController {
 	private final CategoryService categoryService;
 	private final FindExpService findExpService;
 	private final MemberService memService;
+	private final FileUploadUtil fileUploadUtil;
 
 	@Autowired
 	public RequestController(RequestService requestService, CategoryService categoryService,
-			FindExpService findExpService, MemberService memService) {
+			FindExpService findExpService, MemberService memService, FileUploadUtil fileUploadUtil) {
 		this.requestService = requestService;
 		this.categoryService = categoryService;
 		this.findExpService = findExpService;
 		this.memService = memService;
+		this.fileUploadUtil = fileUploadUtil;
 	}
 
 	@RequestMapping("/request")
@@ -193,7 +199,7 @@ public class RequestController {
 		return "request/requestByClient";
 	}
 	
-	@RequestMapping("/finalRequest")
+	@GetMapping("/finalRequest")
 	public String sendFinalRequest(@RequestParam(defaultValue="0") int requestNo,
 			 HttpSession session, Model model) {
 		int expertNo=(int) session.getAttribute("userNo");
@@ -203,18 +209,20 @@ public class RequestController {
 		RequestVO vo=requestService.selectReceivedRequest(requestNo);
 		logger.info("해당 견적정보 - vo={}", vo);
 		
-		int develop=vo.getRequestDevelopNo();
-		int design=vo.getRequestDesignNo();
+		int developNo=vo.getRequestDevelopNo();
+		int designNo=vo.getRequestDesignNo();
 		vo.setExpertNo(expertNo);
 		Map<String, Object> map=null;
-		if(develop!=0) {
+		if(developNo!=0) {
 			map=requestService.selectRequestDetail1(vo);
-		}else if(design!=0) {
+		}else if(designNo!=0) {
 			map=requestService.selectRequestDetail2(vo);
 		}
 		logger.info("해당 견적정보 출력 - map={}", map);
 		List<Map<String, Object>> qList=requestService.selectQuestion(vo.getCategoryNo());
 		
+		model.addAttribute("developNo", developNo);
+		model.addAttribute("designNo", designNo);
 		model.addAttribute("map", map);
 		model.addAttribute("qList", qList);
 		
@@ -222,18 +230,71 @@ public class RequestController {
 		
 	}
 	
-	@RequestMapping("/requestByExpert")
-	public String requestByExpert() {
+	@PostMapping("/finalRequest")
+	public String sendFinalRequest(@ModelAttribute FinalRequestVO vo,
+			HttpServletRequest request, HttpSession session,Model model) {
 		
+		int expertNo=(int) session.getAttribute("userNo");
+		vo.setExpertNo(expertNo);
+		logger.info("견적 보내기 페이지 - 최종견적 작성 파라미터, vo={}", vo);
 		
+		//파일 업로드 처리
+		String fileName="", originName="";
+		long fileSize=0;
+		int pathFlag=ConstUtil.UPLOAD_REQUSET_FLAG;
+		try {
+			List<Map<String, Object>> fileList 
+				= fileUploadUtil.fileUpload(request, pathFlag);
+			for(int i=0;i<fileList.size();i++) {
+				 Map<String, Object> map=fileList.get(i);
+				 
+				 fileName=(String) map.get("fileName");
+				 originName=(String) map.get("originalFileName");
+				 fileSize=(long) map.get("fileSize");				 
+			}
+			
+			logger.info("파일 업로드 성공, fileName={}", fileName);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
 		
-		logger.info("받은 견적 페이지");
+		//2
+		vo.setFilename(fileName);
+		vo.setOriginalFilename(originName);
+		vo.setFilesize(fileSize);
 		
+		int cnt=requestService.insertFinalRequest(vo);
+		String msg="최종견적보내기 실패", url="/";
+		if(cnt>0) {
+			msg="견적보내기에 성공하였습니다.";
+			url="/request/requestByClient";
+		}
 		
+		requestService.updateMatchA(vo.getRequestNo());
 		
-		return "request/requestByExpert";
+		model.addAttribute("msg", msg);
+		model.addAttribute("url", url);
+		
+		return "common/message";
 	}
 	
+	@RequestMapping("/requestByExpert")
+	public String requestByExpert(HttpSession session, Model model) {
+		
+		int memberNo=(int) session.getAttribute("userNo");
+		
+		FinalRequestVO list=requestService.selectFinalRequest(memberNo);
+		logger.info("받은 요청 목록 조회 detail={}, list.size={}", fieldSearchVo.getDetail(),list.size());
+		
+		model.addAttribute("list", list);
+		model.addAttribute("fieldList", fieldList);
+		model.addAttribute("pagingInfo", pagingInfo);
+		model.addAttribute("curPage", curPage);
+		
+		return "request/requestByClient";
+	}
 	
 	
 }
