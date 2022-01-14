@@ -6,7 +6,6 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/css/style.knowhows.css">
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.6.0.min.js'/>"></script>
-
 <style type="text/css">
 	body{
 		padding:5px;
