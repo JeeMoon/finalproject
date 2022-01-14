@@ -93,7 +93,7 @@ public class RequestServiceImpl implements RequestService{
 	}
 
 	@Override
-	public FinalRequestVO selectFinalRequest(int memberNo) {
+	public List<Map<String, Object>> selectFinalRequest(int memberNo) {
 		return requestDao.selectFinalRequest(memberNo);
 	}
 

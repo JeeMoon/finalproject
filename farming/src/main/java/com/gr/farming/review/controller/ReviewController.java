@@ -53,6 +53,7 @@ public class ReviewController {
 		
 		logger.info("후기 등록 처리, vo={}", vo);
 		int cnt=reviewService.insertReview(vo);
+		reviewService.updateRate(vo.getExpertNo());
 		if(cnt>0) {
 			logger.info("후기 등록 성공");
 		}else {

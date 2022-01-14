@@ -114,8 +114,8 @@
 	</update>
 	
 	<!-- 일반회원의 받은 견적 조회 -->
-	<select id="selectFinalRequest" parameterType="int" resultType="finalRequestVo">
-		select * from final_request
+	<select id="selectFinalRequest" parameterType="int" resultType="map">
+		select * from final_detail
 		where member_no=#{memberNo}
 	</select>
 </mapper>

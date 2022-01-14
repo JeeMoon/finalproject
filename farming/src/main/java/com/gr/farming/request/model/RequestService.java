@@ -30,5 +30,5 @@ public interface RequestService {
 	int updateMatchY(int requestNo);
 	
 	//받은 견적 조회(회원)
-	FinalRequestVO selectFinalRequest(int memberNo);
+	List<Map<String, Object>> selectFinalRequest(int memberNo);
 }

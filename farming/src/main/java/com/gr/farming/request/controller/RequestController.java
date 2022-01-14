@@ -285,15 +285,11 @@ public class RequestController {
 		
 		int memberNo=(int) session.getAttribute("userNo");
 		
-		FinalRequestVO list=requestService.selectFinalRequest(memberNo);
-		logger.info("받은 요청 목록 조회 detail={}, list.size={}", fieldSearchVo.getDetail(),list.size());
+		List<Map<String, Object>> list=requestService.selectFinalRequest(memberNo);
 		
 		model.addAttribute("list", list);
-		model.addAttribute("fieldList", fieldList);
-		model.addAttribute("pagingInfo", pagingInfo);
-		model.addAttribute("curPage", curPage);
 		
-		return "request/requestByClient";
+		return "request/requestByExpert";
 	}
 	
 	
