@@ -122,8 +122,10 @@
 								<li class="nav-item"><a class="nav-link" href="<c:url value='/request/requestByExpert'/>">받은견적</a>
 								<li class="nav-item"><a class="nav-link" href="<c:url value='/chat/rooms'/>">채팅</a>
 								<li class="nav-item dropdown ms-2">
-									<a class="btn btn-primary" id="docsDropdownMenuLink"
-								data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${name } 고객님</a>
+									<a id="docsDropdownMenuLink"
+								data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<img class="avatar avatar-sm avatar-border-white ms-3" style="margin-right:1.3rem"
+										src="${pageContext.request.contextPath }/resources/userImg/${userImg}"></a>
 								<!-- 프로필 이미지로 변경예정 -->
 								<div class="dropdown-menu dropdown-menu-end" aria-labelledby="docsDropdownMenuLink">
 									<h6 class="dropdown-header fw-normal">${name } 고객님</h6>
@@ -140,12 +142,14 @@
 								<li class="nav-item"><a class="nav-link" href="<c:url value='/request/requestByClient'/>">받은요청</a>
 								<li class="nav-item"><a class="nav-link" href="<c:url value='/chat/rooms'/>">채팅</a>
 								<li class="nav-item"><a class="nav-link" href="<c:url value='/findexp/expDetailEdit?expertNo=${userNo }'/>">프로필</a>
-								<li class="nav-item dropdown ms-2">
-									<a class="btn btn-primary" id="docsDropdownMenuLink"
-								data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${name } 고객님</a>
+								<li class="nav-item dropdown ms-1">
+									<a  id="docsDropdownMenuLink"
+								data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<img class="avatar avatar-sm avatar-border-white ms-3" style="margin-right:1.3rem"
+										src="${pageContext.request.contextPath }/resources/userImg/${userImg}"></a>
 								<!-- 프로필 이미지로 변경예정 -->
 									<div class="dropdown-menu dropdown-menu-end" aria-labelledby="docsDropdownMenuLink">
-										<h6 class="dropdown-header fw-normal">${name } 고객님</h6>
+										<h6 class="dropdown-header fw-normal">${name } 전문가님</h6>
 											<a class="dropdown-item" href="docs/docs-introduction.html">파밍페이</a>
 											<a class="dropdown-item" href="<c:url value='/expert/mypage/main?email=${email }'/>l">마이페이지</a>
 											<c:if test="${empty career }">
