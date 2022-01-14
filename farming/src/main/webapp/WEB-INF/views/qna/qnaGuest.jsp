@@ -26,7 +26,7 @@
         <div class="col-lg-2">
             <div class="sticky-top mb-5" style="top: 120px;">
               <div class="sidebar-block">
-                <h6 class="sidebar-heading ms-3">거래내역</h6>
+                <h6 class="sidebar-heading ms-3">Q & A</h6>
                 <nav class="nav nav-pills flex-column">
 	                <a class="nav-link mb-2 active" href="#">파밍의 첫걸음</a>
 	                <a class="nav-link mb-2" href="<c:url value='/qna/qnaDeveloper'/>">IT 전문가 가이드</a>
@@ -72,7 +72,7 @@
               
               <h3>4.&nbsp; 전문가와 연락하기</h3>
               <blockquote class="blockquote blockquote-primary bg-gray-100 p-4">
-              전문가의 견적서가 도착하면 채팅방이 자동으로 열립니다.<br><br>
+              전문가의 견적서가 도착하면 <a href="<c:url value='../chat/rooms'/>">채팅방</a>이 자동으로 열립니다.<br><br>
               전문가와 채팅방에서 대화를 하거나 안심번호를 통해 전화로 상담할 수 있습니다.<br>
               
               </blockquote>
