@@ -29,7 +29,6 @@
             	<option>추가정보를 등록하세요</option>
             </c:if>
             <c:if test="${!empty fieldList}">
-	            <option value="${fieldSearchVo.detail }">${fieldSearchVo.detail }   </option>
 	            <c:forEach var="fieldvo" items="${fieldList }">
 	              <option value="${fieldvo.detail }">${fieldvo.detail }   </option>
 	            </c:forEach>
@@ -47,7 +46,7 @@
         <div class="list-group shadow mb-5">
 		  <c:if test="${!empty list }">
         	<c:forEach var="map" items="${list }">
-	        	<a class="list-group-item list-group-item-action p-4" href="<c:url value='/request/finalRequest'/>">
+	        	<a class="list-group-item list-group-item-action p-4" href="<c:url value='/request/finalRequest?requestNo=${map[\'REQUEST_NO\'] }'/>">
 	            <div class="row">
 	              <div class="col-lg-3 align-self-center mb-4 mb-lg-0">
 	                <div class="d-flex align-items-center mb-3">
@@ -74,8 +73,18 @@
 	                    </p>
 	                  </div>
 	                  <div class="col-12 col-lg-2 align-self-center">
-	                  	<span class="text-primary text-sm text-uppercase me-4 me-lg-0">
-	                  		<i class="fa fa-check fa-fw me-2"> </i>견적서 보냄</span>
+	                  	<c:if test="${map['MATCH'] =='Y'}">
+	                  		<span class="text-primary text-sm text-uppercase me-4 me-lg-0">
+	                  			<i class="far fa-comment-dots fa-fw me-1"> </i>채팅 중</span>
+	                  	</c:if>
+	                  	<c:if test="${map['MATCH'] =='A'}">
+	                  		<span class="text-primary text-sm text-uppercase me-4 me-lg-0">
+	                  			<i class="fa fa-check fa-fw me-1"> </i>견적서 발송</span>
+	                  	</c:if>
+	                  	<c:if test="${map['MATCH'] =='N'}">
+	                  		<span class="text-muted text-sm text-uppercase me-4 me-lg-0">
+	                  			<i class="fas fa-pen fa-fw me-1"> </i>견적서 작성</span>
+	                  	</c:if>
 	                  </div>
 	                </div>
 	              </div>

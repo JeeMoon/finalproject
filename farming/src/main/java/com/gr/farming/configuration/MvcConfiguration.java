@@ -21,7 +21,15 @@ public class MvcConfiguration implements WebMvcConfigurer {
 		 .addPathPatterns("/chat/*", "/member/mypage/*", "/qna/qnaList");
 		 
 		 registry.addInterceptor(new ExpLoginInterceptor())
-		 .addPathPatterns("/expert/mypage/*", "/expert/addExp/*", "/request/requestByClient", "/request/requestByExpert*");
+
+		 .addPathPatterns("/expert/mypage/*", "/expert/addExp/*");
+		 
+		 registry.addInterceptor(new ExpLoginInterceptor())
+		 .addPathPatterns("/request/**", "/request/**");
+		 
+		 registry.addInterceptor(new ExpLoginInterceptor())
+		 .addPathPatterns("/findexp/expDetailEdit", "/expert/mypage/*", "/expert/addExp/*");
+
 		
 	}
 

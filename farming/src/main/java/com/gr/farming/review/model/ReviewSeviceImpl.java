@@ -31,5 +31,10 @@ public class ReviewSeviceImpl implements ReviewService{
 		return reviewDao.selectReviewAvg(expertNo);
 	}
 
+	@Override
+	public int updateRate(int expertNo) {
+		return reviewDao.updateRate(expertNo);
+	}
+
 	
 }
