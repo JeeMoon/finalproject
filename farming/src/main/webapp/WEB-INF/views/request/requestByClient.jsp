@@ -20,7 +20,7 @@
         </div>
         <div class="d-flex justify-content-between align-items-center flex-column flex-lg-row mb-5">
           <div class="me-3">
-            <p class="mb-3 mb-lg-0">전문가님은 <strong>${fn:length(list) } 명의 회원님께</strong> 견적요청을 받았습니다</p>
+            <p class="mb-3 mb-lg-0">전문가님은 <strong>${pagingInfo.totalRecord } 명의 회원님께</strong> 견적요청을 받았습니다</p>
           </div>
           <div class="text-center">
             <label class="form-label me-2" for="detail">분야 검색</label>
@@ -73,15 +73,19 @@
 	                    </p>
 	                  </div>
 	                  <div class="col-12 col-lg-2 align-self-center">
-	                  	<c:if test="${map['MATCH'] =='Y'}">
+	                  	<c:if test="${sendMap['STATE'] =='Y'}">
 	                  		<span class="text-primary text-sm text-uppercase me-4 me-lg-0">
 	                  			<i class="far fa-comment-dots fa-fw me-1"> </i>채팅 중</span>
 	                  	</c:if>
-	                  	<c:if test="${map['MATCH'] =='A'}">
+	                  	<c:if test="${map['MATCH'] =='Y'}">
+	                  		<span class="text-muted text-sm text-uppercase me-4 me-lg-0">
+	                  			<i class="fa fa-check fa-fw me-1"> </i>의뢰 마감</span>
+	                  	</c:if>
+	                  	<c:if test="${map['REQUEST_NO'] == sendMap['REQUEST_NO']}">
 	                  		<span class="text-primary text-sm text-uppercase me-4 me-lg-0">
 	                  			<i class="fa fa-check fa-fw me-1"> </i>견적서 발송</span>
 	                  	</c:if>
-	                  	<c:if test="${map['MATCH'] =='N'}">
+	                  	<c:if test="${map['REQUEST_NO'] != sendMap['REQUEST_NO']}">
 	                  		<span class="text-muted text-sm text-uppercase me-4 me-lg-0">
 	                  			<i class="fas fa-pen fa-fw me-1"> </i>견적서 작성</span>
 	                  	</c:if>
@@ -129,20 +133,20 @@
 		$('form[name=frmPage]').submit();
 	}
 	
-	$(function(){
-		
-		console.log('a값='+$('li.active a').text());
-	});
 	$(function(){	
+		console.log('a값='+$('li.active a').text());
+		var curPage=$('li.active a').text();
+		
 		$('#detail').change(function(){
 			$.ajax({
 				url: "<c:url value='/request/requestByClient'/>",
-				type: "POST",
+				type: "GET",
 				data: {
 					"detail" : $(this).val(),
-					//"currentPage" : $('li.active a').text()
+					//"currentPage" : curPage
 				},
 				success:function(data){
+					pageFunc(curPage);
 					document.write(data);
 				}
 			})
