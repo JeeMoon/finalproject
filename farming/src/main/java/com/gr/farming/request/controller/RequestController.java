@@ -157,12 +157,13 @@ public class RequestController {
 	
 	@RequestMapping("/requestByClient")
 	public String requestByClient(@ModelAttribute FieldSearchVO fieldSearchVo
-			,@ModelAttribute SearchVO searchVo, HttpSession session, Model model) {
+			, HttpSession session, Model model) {
 		
 		int expertNo=(int) session.getAttribute("userNo");
 		fieldSearchVo.setUserNo(expertNo);
 		logger.info("받은 요청 페이지 - 파라미터 fieldSearchVo={}", fieldSearchVo);
-		logger.info("받은 요청 페이지 - 파라미터 currentPage={}", fieldSearchVo.getCurrentPage());
+		
+		List<Map<String, Object>> sendList=requestService.selectFinalRequest(expertNo);
 		
 		String detail=fieldSearchVo.getDetail();
 		if(detail==null || detail.isEmpty()) {
@@ -183,18 +184,18 @@ public class RequestController {
 		List<FieldDetailVO> fieldList=findExpService.selectFieldDetail(expertNo);
 		
 		List<Map<String, Object>> list=requestService.selectRequestList1(fieldSearchVo);
+		logger.info("받은 요청 목록 조회 list={}", list);
 		logger.info("받은 요청 목록 조회 detail={}, list.size={}", fieldSearchVo.getDetail(),list.size());
 		
 		int totalRecord=requestService.selectTotalRecord(fieldSearchVo);
 		logger.info("받은 요청 목록 조회 수 - totalRecord={}", totalRecord);
 		
 		pagingInfo.setTotalRecord(totalRecord);
-		int curPage=pagingInfo.getCurrentPage();
 		
 		model.addAttribute("list", list);
+		model.addAttribute("sendList", sendList);
 		model.addAttribute("fieldList", fieldList);
 		model.addAttribute("pagingInfo", pagingInfo);
-		model.addAttribute("curPage", curPage);
 		
 		return "request/requestByClient";
 	}
@@ -285,7 +286,7 @@ public class RequestController {
 		
 		int memberNo=(int) session.getAttribute("userNo");
 		
-		List<Map<String, Object>> list=requestService.selectFinalRequest(memberNo);
+		List<Map<String, Object>> list=requestService.selectFinalDetail(memberNo);
 		
 		model.addAttribute("list", list);
 		

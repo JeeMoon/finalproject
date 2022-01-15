@@ -55,12 +55,30 @@
 		select * from request
 		where request_no=#{requestNo}
 	</select>
+	<select id="selectFinalRequest" parameterType="int" resultType="map">
+		select * from final_detail
+		where expert_no=#{expertNo}
+	</select>
 	
 	<!-- 전문가회원 - 받은 요청서 각 문답 조회 -->
 	<select id="selectRequestList1" parameterType="fieldSearchVo" resultType="map">
-		select * from req_detail_develop
-		where expert_no=#{userNo} and detail like '%' || #{detail} || '%'
-		order by request_no desc
+		select *
+		from
+		(
+		    select rownum as RNUM, A.*
+		    from
+		    (
+				select * from req_detail_develop
+				where expert_no=#{userNo} 
+				<if test="detail!=null and detail!=''">
+					and detail like '%' || #{detail} || '%'
+				</if>
+				order by request_no desc
+			)A
+		)
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} 
+			and RNUM<=#{firstRecordIndex}+ #{recordCountPerPage}]]>
 	</select>
 	<select id="selectRequestList2" parameterType="fieldSearchVo" resultType="map">
 		select * from req_detail_design
@@ -108,14 +126,15 @@
 		where request_no=#{requestNo}
 	</update>
 	<update id="updateMatchY" parameterType="int">
-		update request
-		set match='Y'
+		update final_request
+		set STATE='Y'
 		where request_no=#{requestNo}
 	</update>
 	
 	<!-- 일반회원의 받은 견적 조회 -->
-	<select id="selectFinalRequest" parameterType="int" resultType="map">
+	<select id="selectFinalDetail" parameterType="int" resultType="map">
 		select * from final_detail
 		where member_no=#{memberNo}
 	</select>
+	
 </mapper>

@@ -16,11 +16,13 @@ public interface RequestService {
 	List<Map<String, Object>> selectQuestion(int categoryNo);
 	List<Map<String, Object>> selectAnswer(int qNo);
 	
+	//받은 요청(전문가)
 	RequestVO selectReceivedRequest(int requestNo);
 	List<Map<String, Object>> selectRequestList1(FieldSearchVO vo);
 	List<Map<String, Object>> selectRequestList2(FieldSearchVO vo);
 	Map<String, Object> selectRequestDetail1(RequestVO vo);
 	Map<String, Object> selectRequestDetail2(RequestVO vo);
+	List<Map<String, Object>> selectFinalRequest(int expertNo);
 	
 	int selectTotalRecord(FieldSearchVO vo);
 	
@@ -30,5 +32,5 @@ public interface RequestService {
 	int updateMatchY(int requestNo);
 	
 	//받은 견적 조회(회원)
-	List<Map<String, Object>> selectFinalRequest(int memberNo);
+	List<Map<String, Object>> selectFinalDetail(int memberNo);
 }
