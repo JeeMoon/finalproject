@@ -18,10 +18,14 @@ public interface ConstUtil {
 	String IMAGE_FILE_UPLOAD_PATH="pd_images";
 
 	String IMAGE_FILE_UPLOAD_PATH_TEST="E:\\java\\lecture\\workspace_list\\farming_ws\\Farming\\farming\\src\\main\\webapp\\resources\\userImg";
-
+	
+	//견적보내기 페이지 - 견적작성 완료시 첨부파일 이미지 저장 경로
+	String REQUSET_UPLOAD_PATH="request_images";
+	String REQUSET_UPLOAD_PATH_TEST="/requestImg";
 	
 	//자료실 업로드인지, 상품 등록시 업로드인지 구분값
 	int UPLOAD_FILE_FLAG=1; //자료실 업로드
 	int UPLOAD_IMAGE_FLAG=2; //상품 등록시 이미지 업로드
+	int UPLOAD_REQUSET_FLAG=3; //견적작성시 이미지 업로드
 	
 }

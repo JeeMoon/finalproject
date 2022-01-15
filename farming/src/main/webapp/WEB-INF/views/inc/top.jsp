@@ -104,11 +104,6 @@
 								<c:if test="${user eq '사용자' }">
 									<a class="dropdown-item" href="<c:url value='/findExp/findExpList'/>">전문가찾기</a>
 								</c:if>
-								<c:if test="${user eq '전문가' }">
-									<c:if test="${empty career }">
-										<a class="dropdown-item" href="<c:url value='/expert/addExp/addExp'/>">추가정보입력</a>
-									</c:if>
-								</c:if>
 							</div>
 						</li>
 						<li class="nav-item"><a class="nav-link" href="contact.html">전문가의 노하우</a></li>
@@ -127,12 +122,13 @@
 								<li class="nav-item"><a class="nav-link" href="<c:url value='/request/requestByExpert'/>">받은견적</a>
 								<li class="nav-item"><a class="nav-link" href="<c:url value='/chat/rooms'/>">채팅</a>
 								<li class="nav-item dropdown ms-2">
-									<a class="btn btn-primary" id="docsDropdownMenuLink"
-								data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${name } 고객님</a>
+									<a id="docsDropdownMenuLink"
+								data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+								<img class="avatar avatar-sm avatar-border-white ms-2" style="margin-right:1.3rem"
+										src="${pageContext.request.contextPath }/resources/userImg/${userImg}"></a>
 								<!-- 프로필 이미지로 변경예정 -->
 								<div class="dropdown-menu dropdown-menu-end" aria-labelledby="docsDropdownMenuLink">
 									<h6 class="dropdown-header fw-normal">${name } 고객님</h6>
-									<a class="dropdown-item" href="<c:url value='/request/requestByExpert'/>">받은견적</a>
 									<a class="dropdown-item" href="docs/docs-introduction.html">파밍페이</a>
 									<a class="dropdown-item" href="<c:url value='/member/mypage/main?email=${email }'/>l">마이페이지</a>
 									<div class="dropdown-divider"></div>
@@ -145,16 +141,20 @@
 							<c:if test="${user eq '전문가' }">
 								<li class="nav-item"><a class="nav-link" href="<c:url value='/request/requestByClient'/>">받은요청</a>
 								<li class="nav-item"><a class="nav-link" href="<c:url value='/chat/rooms'/>">채팅</a>
-								<li class="nav-item"><a class="nav-link" href="<c:url value='/findexp/expDetailEdit?expertNo=${expNo }'/>">프로필</a>
-								<li class="nav-item dropdown ms-2">
-									<a class="btn btn-primary" id="docsDropdownMenuLink"
-								data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">${name } 고객님</a>
+								<li class="nav-item"><a class="nav-link" href="<c:url value='/findexp/expDetailEdit?expertNo=${userNo }'/>">프로필</a>
+								<li class="nav-item dropdown ms-1">
+									<a  id="docsDropdownMenuLink"
+								data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+									<img class="avatar avatar-sm avatar-border-white ms-2" style="margin-right:1.3rem"
+										src="${pageContext.request.contextPath }/resources/userImg/${userImg}"></a>
 								<!-- 프로필 이미지로 변경예정 -->
 									<div class="dropdown-menu dropdown-menu-end" aria-labelledby="docsDropdownMenuLink">
-										<h6 class="dropdown-header fw-normal">${name } 고객님</h6>
-											<a class="dropdown-item" href="<c:url value='/request/requestByClient'/>">받은요청</a>
+										<h6 class="dropdown-header fw-normal">${name } 전문가님</h6>
 											<a class="dropdown-item" href="docs/docs-introduction.html">파밍페이</a>
 											<a class="dropdown-item" href="<c:url value='/expert/mypage/main?email=${email }'/>l">마이페이지</a>
+											<c:if test="${empty career }">
+												<a class="dropdown-item" href="<c:url value='/expert/addExp/addExp'/>">추가정보입력</a>
+											</c:if>
 											<div class="dropdown-divider"></div>
 											<a class="dropdown-item" href="docs/components-bootstrap.html">사용자로 전환하기</a>
 										<a class="dropdown-item" href="docs/components-directory.html">설정</a>

@@ -26,7 +26,7 @@
         <div class="col-lg-2">
             <div class="sticky-top mb-5" style="top: 120px;">
               <div class="sidebar-block">
-                <h6 class="sidebar-heading ms-3">거래내역</h6>
+                <h6 class="sidebar-heading ms-3">Q & A</h6>
                 <nav class="nav nav-pills flex-column">
 	                <a class="nav-link mb-2" href="<c:url value='/qna/qnaGuest'/>">파밍의 첫걸음</a>
 	                <a class="nav-link mb-2 active" href="#">IT 전문가 가이드</a>
