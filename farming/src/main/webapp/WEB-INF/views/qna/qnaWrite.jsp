@@ -30,7 +30,7 @@ function save(){
 		</div>
         <div>  
         	<label for="content"></label>        
- 			<textarea id="content" name="content" rows="10" cols="50" style="width: 50%;"></textarea>
+ 			<textarea id="content" name="content" rows="12" cols="40" style="width: 50%;"></textarea>
 			<!-- textarea 밑에 script 작성하기 -->
 			<script id="smartEditor" type="text/javascript"> 
 				var oEditors = [];
