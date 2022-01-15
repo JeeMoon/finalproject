@@ -93,8 +93,13 @@ public class RequestServiceImpl implements RequestService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectFinalRequest(int memberNo) {
-		return requestDao.selectFinalRequest(memberNo);
+	public List<Map<String, Object>> selectFinalDetail(int memberNo) {
+		return requestDao.selectFinalDetail(memberNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectFinalRequest(int expertNo) {
+		return requestDao.selectFinalRequest(expertNo);
 	}
 
 

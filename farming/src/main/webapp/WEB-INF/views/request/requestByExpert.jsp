@@ -14,7 +14,7 @@
         <div class="row mb-5">
           <div class="col-lg-7 mb-5 mb-lg-0 ">
           <c:if test="${empty list }">
-	          <div class="text-block">
+	          <div class="list-group mb-4">
 	          	<p class="text-sm text-muted">받은 견적이 없습니다.</p>
 	          </div>
           </c:if>
@@ -25,7 +25,7 @@
 	          </div>
 	        </div>
            <c:forEach var="map" items="${list }">
-            <div class="text-block"> 
+            <div class="list-group mb-4"> 
 	         <a class="list-group-item list-group-item-action p-4" href="<c:url value='/request/finalRequest?requestNo=${map[\'REQUEST_NO\'] }'/>">
               <div class="row mb-3">
                 <div class="col-sm-9">
