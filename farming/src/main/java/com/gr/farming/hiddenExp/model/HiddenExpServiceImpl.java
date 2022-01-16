@@ -1,6 +1,7 @@
 package com.gr.farming.hiddenExp.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -18,7 +19,7 @@ public class HiddenExpServiceImpl implements HiddenExpService{
 	}
 
 	@Override
-	public List<ExpertVO> selectByAddress(String keyword) {
+	public List<Map<String, Object>> selectByAddress(String keyword) {
 		return hiddenExpDao.selectByAddress(keyword);
 	}
 

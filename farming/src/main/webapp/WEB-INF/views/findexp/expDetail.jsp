@@ -183,7 +183,7 @@
               <div class="collapse mt-4" id="leaveReview">
                 <h5 class="mb-4">서비스 후기 작성</h5>
                 <form class="form" id="contact-form" method="post" action="<c:url value='/reviewWrite'/>">
-	                <input type="hidden" name="memberNo" value="${expNo }">
+	                <input type="hidden" name="memberNo" value="${userNo }">
 	                <input type="hidden" name="name" value="${name }">
 					<input type="hidden" name="expertNo" value="${expVo.expertNo }">
                   <div class="row">
@@ -257,35 +257,40 @@
           <div class="swiper-wrapper pb-5">
           
             <!-- 얘한덩어리가 슬라이드 하나 -->
-            <div class="swiper-slide h-auto px-2">
-              <!-- place item-->
-              <div class="w-100 h-100 hover-animate" data-marker-id="59c0c8e33b1527bfe2abaf92">
-                <div class="card h-100 border-0 shadow">
-                  <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="${pageContext.request.contextPath }/resources/img/photo/photo-1484154218962-a197022b5858.jpg" alt="Modern, Well-Appointed Room"/><a class="tile-link" href="detail-rooms.html"></a>
-                    <div class="card-img-overlay-bottom z-index-20">
-                      <div class="d-flex text-white text-sm align-items-center"><img class="avatar avatar-border-white flex-shrink-0 me-2" src="${pageContext.request.contextPath }/resources/img/avatar/avatar-0.jpg" alt="Pamela"/>
-                        <div>Pamela</div>
-                      </div>
-                    </div>
-                    <div class="card-img-overlay-top text-end"><a class="card-fav-icon position-relative z-index-40" href="javascript: void();"> 
-                        <svg class="svg-icon text-white">
-                          <use xlink:href="#heart-1"> </use>
-                        </svg></a></div>
-                  </div>
-                  <div class="card-body d-flex align-items-center">
-                    <div class="w-100">
-                      <h6 class="card-title"><a class="text-decoration-none text-dark" href="detail-rooms.html">Modern, Well-Appointed Room</a></h6>
-                      <div class="d-flex card-subtitle mb-3">
-                        <p class="flex-grow-1 mb-0 text-muted text-sm">Private room</p>
-                        <p class="flex-shrink-1 mb-0 card-stars text-xs text-end"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i>
-                        </p>
-                      </div>
-                      <p class="card-text text-muted"><span class="h4 text-primary">$80</span> per night</p>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+            <c:forEach var="map" items="${expList }">
+            	<c:if test="${map['EXPERT_NO']!=param.expertNo }">
+	            <div class="swiper-slide h-auto px-2">
+	              <!-- place item-->
+	              <div class="w-100 h-100 hover-animate" data-marker-id="59c0c8e33b1527bfe2abaf92">
+	                <div class="card h-100 border-0 shadow">
+	                  <div class="card-img-top overflow-hidden gradient-overlay"> <img class="img-fluid" src="${pageContext.request.contextPath }/resources/img/photo/photo-1484154218962-a197022b5858.jpg" alt="Modern, Well-Appointed Room"/>
+	                  	<a class="tile-link" href="<c:url value='/findexp/expDetail?expertNo=${map[\'EXPERT_NO\'] }'/>"></a>
+	                    <div class="card-img-overlay-bottom z-index-20">
+	                      <div class="d-flex text-white text-sm align-items-center"><img class="avatar avatar-border-white flex-shrink-0 me-2" src="${pageContext.request.contextPath }/resources/userImg/${map['FILENAME']}" alt=""/>
+	                        <div>${map['NAME'] }</div>
+	                      </div>
+	                    </div>
+	                    <div class="card-img-overlay-top text-end"><a class="card-fav-icon position-relative z-index-40" href="javascript: void();"> 
+	                        <svg class="svg-icon text-white">
+	                          <use xlink:href="#heart-1"> </use>
+	                        </svg></a></div>
+	                  </div>
+	                  <div class="card-body d-flex align-items-center">
+	                    <div class="w-100">
+	                      <h6 class="card-title"><a class="text-decoration-none text-dark" href="detail-rooms.html">${map['INTRO'] }</a></h6>
+	                      <div class="d-flex card-subtitle mb-3">
+	                        <p class="flex-grow-1 mb-0 text-muted text-sm">${fn:substring(map['ADDRESS1'],0,6)}</p>
+	                        <p class="flex-shrink-1 mb-0 card-stars text-xs text-end"><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i><i class="fa fa-star text-warning"></i>
+	                        </p>
+	                      </div>
+	                      <p class="card-text text-muted"><strong>${map['EMP_COUNT'] }</strong>회 고용</p>
+	                    </div>
+	                  </div>
+	                </div> 
+	              </div>
+	            </div>
+	           </c:if>
+            </c:forEach>
             <!--  -->
           </div>
           <!-- If we need pagination-->

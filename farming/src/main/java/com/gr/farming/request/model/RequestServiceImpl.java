@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gr.farming.common.FieldSearchVO;
-import com.gr.farming.field.model.FieldDetailVO;
+import com.gr.farming.common.SearchVO2;
 
 @Service
 public class RequestServiceImpl implements RequestService{
@@ -93,13 +93,28 @@ public class RequestServiceImpl implements RequestService{
 	}
 
 	@Override
-	public List<Map<String, Object>> selectFinalDetail(int memberNo) {
-		return requestDao.selectFinalDetail(memberNo);
+	public List<Map<String, Object>> selectFinalDetail(int requestNo) {
+		return requestDao.selectFinalDetail(requestNo);
 	}
 
 	@Override
 	public List<Map<String, Object>> selectFinalRequest(int expertNo) {
 		return requestDao.selectFinalRequest(expertNo);
+	}
+
+	@Override
+	public int selectTotalRecord2(SearchVO2 vo) {
+		return requestDao.selectTotalRecord2(vo);
+	}
+
+	@Override
+	public Map<String, Object> selectMyRequestDetail(int requestNo) {
+		return requestDao.selectMyRequestDetail(requestNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectMyRequestAll(int memberNo) {
+		return requestDao.selectMyRequestAll(memberNo);
 	}
 
 

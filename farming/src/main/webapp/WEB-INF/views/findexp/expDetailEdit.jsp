@@ -13,7 +13,7 @@ href="${pageContext.request.contextPath }/resources/css/request.css">
 #btEdit4 + div#payMethod{display:none}
 #btEdit5 + .select_box{display:none}
 #btEdit6 + .select_box{display:none}
-#btEdit7 ~ label{display:none}
+#btEdit7 ~ ul{display:none}
 #btEdit8 ~ label{display:none}
 #btEdit9 + .radio_box{display:none}
 
@@ -227,15 +227,20 @@ href="${pageContext.request.contextPath }/resources/css/request.css">
 	          	<a id="btEdit7" class="mb-2 btEdit text-primary col-md-4 d-md-flex align-items-center justify-content-end"
 	          		>수정</a>
 	            <p class="text-body small">허위정보에 대한 모든 책임은 본인에게 있습니다</p>
-           		<label class="file-uploader" style="width: 80px; height: 80px;">
-            		<input class="file-uploader-input" type="file" name="businessLicense" id="businessLicense">
-           			<span class="slot-content"></span>
-           		</label>
-          		<div class="imgBox"></div>
+           		<ul class="list-inline">
+        			<li class="list-inline-item listfl wh80">
+	          			<label class="file-uploader w-100 h-100" >
+		            		<input class="file-uploader-input" type="file" name="businessLicense" id="businessLicense" onchange="readURL(this);" >
+		           			<span class="slot-content"></span>
+		           		</label>
+	           		</li>
+	           		<li class="list-inline-item wh80" id="image_container">
+	           		</li>
+           		</ul> 
 	           	<c:if test="${infoVo.businessLicense!='N'}">
-		            <p id="infoBox7" class="btEdit text-muted fw-light">${infoVo.businessLicense}</p>
-		            <img src="<c:url value='/resources/pd_images/${infoVo.businessLicense }'/>"
-	 				border="0" width="150">
+		            <p id="infoBox7" class="btEdit text-muted fw-light">
+		            	<img src="<c:url value='/resources/pd_images/${infoVo.businessLicense }'/>"
+	 				border="0" width="150"></p>
 		        </c:if>
 	         </div>
 	         
@@ -322,6 +327,16 @@ href="${pageContext.request.contextPath }/resources/css/request.css">
     </div>
    </c:if>
 <script>
+	function readURL(input) {
+		  var reader = new FileReader();
+		  reader.onload = function(e) {
+			var img = document.createElement('img');
+			img.setAttribute("src", event.target.result);
+			img.setAttribute("class", "thumb w-100 h-100");
+			document.querySelector("#image_container").appendChild(img);
+		  };
+		  reader.readAsDataURL(event.target.files[0]);
+	} 	
 	
 	$(function(){
 		textchange=false;
@@ -493,7 +508,7 @@ href="${pageContext.request.contextPath }/resources/css/request.css">
 					});
 				})
 			}
-			$(this).siblings('label').toggle();
+			$(this).siblings('ul').toggle();
 			//$(this).siblings('p').toggle();
 		});
 		$('#btEdit8').click(function(){

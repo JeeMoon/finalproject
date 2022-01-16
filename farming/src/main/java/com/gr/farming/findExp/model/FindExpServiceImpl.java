@@ -45,6 +45,11 @@ public class FindExpServiceImpl implements FindExpService{
 	public int updateExpInfo(ExpertInfoVO vo) {
 		return findExpDao.updateExpInfo(vo);
 	}
+
+	@Override
+	public List<Map<String, Object>> selectExpList(int categoryNo) {
+		return findExpDao.selectExpList(categoryNo);
+	}
 	
 	
 }
