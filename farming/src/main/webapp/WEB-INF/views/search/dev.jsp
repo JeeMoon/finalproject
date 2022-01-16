@@ -24,7 +24,7 @@
     	<p class="text-muted mb-4" style="font-size:large;">개임 개발</p>
       	<p class="text-muted mb-4" style="font-size:large;">ios 개발</p>
       	<p class="text-muted mb-4" style="font-size:large;">안드로이드 개발</p>
-      	<p class="text-muted mb-4" style="font-size:large;">웹 개발</p>
+      	<a href="<c:url value='/request/request?categoryNo=4'/>"><p class="text-muted mb-4" style="font-size:large;">웹 개발</p></a>
      	<p class="text-muted mb-4" style="font-size:large;">퍼블리싱</p>
      	<p class="text-muted mb-4" style="font-size:large;">소프트웨어 개발</p>
      	<p class="text-muted mb-4" style="font-size:large;">워드프레스 개발</p>

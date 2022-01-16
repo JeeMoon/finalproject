@@ -12,10 +12,10 @@
         <div class="row">
           <div class="col-xl-8 mx-auto">
           	<form><p class="text-muted mb-4">지금 파밍과 함께 시작해보세요.</p>
-          <div class="input-group">
+          <!-- <div class="input-group">
           	<input class="form-control" type="text" placeholder="어떤 분야의 전문가를 찾으시나요? "><button class="btn btn-primary" type="submit">
           	<i class="fa fa-search"></i></button>
-          	</div>
+          	</div> -->
           	</form>
           	</div>
         </div>
@@ -58,7 +58,60 @@
             </div>
           </div>
           
-          <h4 class="text-muted mb-4" style="margin-left:45%; margin-top:100px;"> 모든 서비스</h4>
+          <h4 class="text-muted mb-4" style="margin-left:45%; margin-top:150px;"> 인기 서비스</h4>
+          <br><br>
+          
+          <div class="col-lg-4 col-sm-6 mb-4 hover-animate" style="margin-top:100px">
+            <div class="card shadow border-0 h-100"><a href="<c:url value='/request/request?categoryNo=23'/>"><img class="img-fluid card-img-top" src="${pageContext.request.contextPath }/resources/img/web_design.png" alt="..."/></a>
+              <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="<c:url value='/search/design'/>">디자인 </a>
+                <h5 class="my-2">웹 디자인          </h5>	
+                <a class="btn btn-link ps-0" href="<c:url value='/request/request?categoryNo=23'/>">Read more<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-sm-6 mb-4 hover-animate" style="margin-top:100px">
+            <div class="card shadow border-0 h-100"><a href="<c:url value='/request/request?categoryNo=4'/>"><img class="img-fluid card-img-top" src="${pageContext.request.contextPath }/resources/img/web_dev.jpg" alt="..."/></a>
+              <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="<c:url value='/search/dev'/>">개발 </a>
+                <h5 class="my-2">웹 개발          </h5>
+                <a class="btn btn-link ps-0" href="<c:url value='/request/request?categoryNo=4'/>">Read more<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-sm-6 mb-4 hover-animate" style="margin-top:100px">
+            <div class="card shadow border-0 h-100"><a href="<c:url value='/request/request?categoryNo=1'/>"><img class="img-fluid card-img-top" src="${pageContext.request.contextPath }/resources/img/game.jpg" alt="..."/></a>
+              <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="<c:url value='/search/dev'/>">개발 </a>
+                <h5 class="my-2">게임 개발          </h5>
+                <a class="btn btn-link ps-0" href="<c:url value='/request/request?categoryNo=1'/>">Read more<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-sm-6 mb-4 hover-animate" style="margin-top:100px">
+            <div class="card shadow border-0 h-100"><img class="img-fluid card-img-top" src="${pageContext.request.contextPath }/resources/img/logo.jpg" alt="..."/>
+              <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="<c:url value='/search/design'/>">디자인 </a>
+                <h5 class="my-2">로고 디자인          </h5>
+                <a class="btn btn-link ps-0" href="#">Read more<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-sm-6 mb-4 hover-animate" style="margin-top:100px">
+            <div class="card shadow border-0 h-100"><img class="img-fluid card-img-top" src="${pageContext.request.contextPath }/resources/img/app.png" alt="..."/>
+              <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="<c:url value='/search/design'/>">디자인 </a>
+                <h5 class="my-2">앱 디자인          </h5>
+                <a class="btn btn-link ps-0" href="#">Read more<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
+              </div>
+            </div>
+          </div>
+          <div class="col-lg-4 col-sm-6 mb-4 hover-animate" style="margin-top:100px">
+            <div class="card shadow border-0 h-100"><img class="img-fluid card-img-top" src="${pageContext.request.contextPath }/resources/img/ai.jpg" alt="..."/>
+              <div class="card-body"><a class="text-uppercase text-muted text-sm letter-spacing-2" href="<c:url value='/search/dev'/>">개발 </a>
+                <h5 class="my-2">인공지능(AI) 개발          </h5>
+                <a class="btn btn-link ps-0" href="#">Read more<i class="fa fa-long-arrow-alt-right ms-2"></i></a>
+              </div>
+            </div>
+          </div>
+          
+          
+          <h4 class="text-muted mb-4" style="margin-left:45%; margin-top:150px;"> 모든 서비스</h4>
           <br><br>
           
           
@@ -74,14 +127,14 @@
 	     	<p class="text-muted mb-4" style="font-size:large;">일러스트 디자인</p>
 	     	<p class="text-muted mb-4" style="font-size:large;">제품 디자인</p>
 	     	<p class="text-muted mb-4" style="font-size:large;">라벨 디자인</p>
-	    	<p class="text-muted mb-4" style="font-size:large;">웹 디자인</p>
+	    	<a href="<c:url value='/request/request?categoryNo=23'/>"><p class="text-muted mb-4" style="font-size:large;">웹 디자인</p></a>
 	    	<p class="text-muted mb-4" style="font-size:large;">앱 디자인</p>
           </div>
           <div style="margin-left:60%;">
           	<p class="text-muted mb-4" style="font-size:large;">개임 개발</p>
 	      	<p class="text-muted mb-4" style="font-size:large;">ios 개발</p>
 	      	<p class="text-muted mb-4" style="font-size:large;">안드로이드 개발</p>
-	      	<p class="text-muted mb-4" style="font-size:large;">웹 개발</p>
+	      	<a href="<c:url value='/request/request?categoryNo=4'/>"><p class="text-muted mb-4" style="font-size:large;">웹 개발</p></a>
 	     	<p class="text-muted mb-4" style="font-size:large;">퍼블리싱</p>
 	     	<p class="text-muted mb-4" style="font-size:large;">소프트웨어 개발</p>
 	     	<p class="text-muted mb-4" style="font-size:large;">워드프레스 개발</p>

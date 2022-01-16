@@ -31,7 +31,7 @@
     	<p class="text-muted mb-4" style="font-size:large;">일러스트 디자인</p>
      	<p class="text-muted mb-4" style="font-size:large;">제품 디자인</p>
      	<p class="text-muted mb-4" style="font-size:large;">라벨 디자인</p>
-    	<p class="text-muted mb-4" style="font-size:large;">웹 디자인</p>
+    	<a href="<c:url value='/request/request?categoryNo=23'/>"><p class="text-muted mb-4" style="font-size:large;">웹 디자인</p></a>
     	<p class="text-muted mb-4" style="font-size:large;">앱 디자인</p>
     </div>
      <br><br><br> 
