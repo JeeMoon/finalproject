@@ -8,6 +8,7 @@
 		from qcomment q join member m
 		on q.member_no = m.member_no
 		where qna_no = #{qnaNo}
+		order by qcomment_no asc
 	</select>
 	
 	<insert id="write" parameterType="QcommentVO">

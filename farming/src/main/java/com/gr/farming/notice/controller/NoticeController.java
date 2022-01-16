@@ -105,7 +105,7 @@ public class NoticeController {
 		NoticeVO vo = noticeService.selectByNo(noticeNo);
 		logger.info("수정화면, 조회결과 vo={}",vo);
 		
-		model.addAttribute(vo);
+		model.addAttribute("vo",vo);
 		
 		return "notice/noticeEdit";
 	}

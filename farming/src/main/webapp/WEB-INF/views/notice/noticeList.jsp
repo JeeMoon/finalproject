@@ -14,7 +14,7 @@
 <body style="padding-top: 72px;">
         <div class="page-wrapper">
             <!-- Hero Section-->
-    <section class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover" style="background-image: url('img/photo/restaurant-1515164783716-8e6920f3e77c.jpg');">
+    <section class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover" style="background-image: url('<c:url value='/resources/img/faq.png'/>');">
       <div class="container overlay-content">
       <ol class="breadcrumb ps-0  justify-content-center">
           <li class="breadcrumb-item"><a href="<c:url value='../index'/>">Home</a></li>
@@ -43,7 +43,7 @@
                                              <tr>
 	                                            <th>공지글 번호</th>
 	                                            <th>관리자</th>
-	                                            <th>내용</th>
+	                                            <th>제목</th>
                                        		 </tr>
 
                                         </thead>
@@ -53,16 +53,17 @@
                                     	<input type="hidden" name="adminName" value="${vo.name }">
 	                                        <tr>
 	                                            <td>
-	                                            <a href="<c:url value='/notice/noticeDetail?noticeNo=${vo.noticeNo }'/>">
 	                                            	${vo.noticeNo }
-	                                            </a>
+	                                            
 	                                            </td>
 	                                            <td>
 	                                            ${vo.name }
 	                                            </td>
 	                                            
 	                                            <td>
-	                                            ${vo.content }
+	                                            <a href="<c:url value='/notice/noticeDetail?noticeNo=${vo.noticeNo }'/>">
+	                                            ${vo.title }
+		                                        </a>
 	                                            </td>
 	                                           
 	                                        </tr>
