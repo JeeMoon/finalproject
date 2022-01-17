@@ -6,7 +6,6 @@
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/css/style.knowhows.css">
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.6.0.min.js'/>"></script>
-
 <style type="text/css">
 	body{
 		padding:5px;
@@ -32,6 +31,8 @@
 			<h3><strong>수정하기</strong></h3><br>
 			<div class="divForm">
 					<form name="frmEdit" method="post" enctype="multipart/form-data" action="<c:url value='/knowhow/edit?knowhowNo=${vo.knowhowNo}'/>"> 
+
+<%-- 	<input type="hidden" name="knowhowNo" value="${param.knowhowNo}"> --%>
 				        <ul class="mb50">
 				        	<li>    
 				            	<label for="title" class="sp1">제목</label>

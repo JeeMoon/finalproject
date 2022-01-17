@@ -48,7 +48,7 @@ function pageFunc(curPage){
     <div class="container">
       <div class="list-group shadow mb-5">
       <c:if test="${empty list }">
-      		<p>데이터가 없습니다.</p>
+      		<div class="t_center"><p>새 글을 추가해주세요.</p></div>
       </c:if>
       <c:if test="${!empty list }">
       	<c:forEach var="vo" items="${list }">
@@ -56,6 +56,12 @@ function pageFunc(curPage){
             <div class="row">
               <div class="col-9 col-lg-4 align-self-center mb-3 mb-lg-0">
                 <div class="d-flex align-items-center mb-1 mb-lg-3">
+                					        	 <c:if test="${vo.step>0 }">
+									<c:forEach var="i" begin="1" end="${vo.step }">
+										&nbsp;&nbsp;
+									</c:forEach>
+									<img src="${pageContext.request.contextPath }/resources/img/re.gif" alt="이전블럭">&nbsp;&nbsp;
+								</c:if>	 
                   <h2 class="h5 mb-0">${vo.title }</h2>
                 </div>
                 <p class="text-sm text-muted">${name }</p><a class="stretched-link" href="user-messages-detail.html"></a>
