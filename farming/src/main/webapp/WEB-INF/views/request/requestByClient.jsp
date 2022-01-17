@@ -46,7 +46,7 @@
         <div class="list-group shadow mb-5">
 		  <c:if test="${!empty list }">
         	<c:forEach var="map" items="${list }">
-	        	<a class="list-group-item list-group-item-action p-4" href="<c:url value='/request/finalRequest?requestNo=${map[\'REQUEST_NO\'] }'/>">
+	        	<a id="alink" class="list-group-item list-group-item-action p-4" href="<c:url value='/request/finalRequest?requestNo=${map[\'REQUEST_NO\'] }'/>">
 	            <div class="row">
 	              <div class="col-lg-3 align-self-center mb-4 mb-lg-0">
 	                <div class="d-flex align-items-center mb-3">
@@ -72,22 +72,23 @@
 	                    	</c:if>
 	                    </p>
 	                  </div>
-	                  <div class="col-12 col-lg-2 align-self-center">
-	                  	<c:if test="${sendMap['STATE'] =='Y'}">
-	                  		<span class="text-primary text-sm text-uppercase me-4 me-lg-0">
-	                  			<i class="far fa-comment-dots fa-fw me-1"> </i>채팅 중</span>
-	                  	</c:if>
+	                  <div class="col-12 col-lg-2 align-self-center" id="state">
+	                  	<c:forEach var="sendMap" items="${sendList }">
+		                  <c:if test="${map['REQUEST_NO']==sendMap['REQUEST_NO'] }">
+		                  	<c:if test="${sendMap['STATE'] =='Y'}">
+		                  		<span class="text-primary text-sm text-uppercase me-4 me-lg-0">
+		                  			<i class="far fa-comment-dots fa-fw me-1"> </i>채팅 중</span>
+		                  	</c:if>
+		                  	
+		                  	<c:if test="${map['REQUEST_NO'] == sendMap['REQUEST_NO']}">
+		                  		<span class="text-primary text-sm text-uppercase me-4 me-lg-0">
+		                  			<i class="fa fa-check fa-fw me-1"> </i>견적서 보냄</span>
+		                  	</c:if>
+	                  	   </c:if>
+	                  	</c:forEach>
 	                  	<c:if test="${map['MATCH'] =='Y'}">
 	                  		<span class="text-muted text-sm text-uppercase me-4 me-lg-0">
 	                  			<i class="fa fa-check fa-fw me-1"> </i>의뢰 마감</span>
-	                  	</c:if>
-	                  	<c:if test="${map['REQUEST_NO'] == sendMap['REQUEST_NO']}">
-	                  		<span class="text-primary text-sm text-uppercase me-4 me-lg-0">
-	                  			<i class="fa fa-check fa-fw me-1"> </i>견적서 발송</span>
-	                  	</c:if>
-	                  	<c:if test="${map['REQUEST_NO'] != sendMap['REQUEST_NO']}">
-	                  		<span class="text-muted text-sm text-uppercase me-4 me-lg-0">
-	                  			<i class="fas fa-pen fa-fw me-1"> </i>견적서 작성</span>
 	                  	</c:if>
 	                  </div>
 	                </div>
@@ -146,7 +147,6 @@
 					//"currentPage" : curPage
 				},
 				success:function(data){
-					pageFunc(curPage);
 					document.write(data);
 				}
 			})

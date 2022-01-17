@@ -4,6 +4,13 @@
 
 <mapper namespace="com.gr.farming.findExp.model.FindExpDAO">
 	
+	<select id="selectExpList" parameterType="int" resultType="map">
+		select * from expertList
+		<if test="categoryNo!=null and categoryNo!=''">
+			where category_no=#{categoryNo}
+		</if>
+	</select>
+	
 	<!-- 전문가회원 추가정보/프로필 조회 -->
 	<select id="selectExpInfo" parameterType="int" resultType="expertInfoVo">
 		select * from EXPERT_INFO

@@ -1,5 +1,6 @@
 package com.gr.farming.findExp.controller;
 
+import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
@@ -11,12 +12,14 @@ import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.gr.farming.common.ConstUtil;
 import com.gr.farming.common.FileUploadUtil;
 import com.gr.farming.expert.model.ExpertVO;
 import com.gr.farming.field.model.FieldDetailVO;
@@ -46,6 +49,20 @@ public class FindExpController {
 		return "findexp/findexpWrite";
 	}
 	
+	
+	@GetMapping
+	public String expList(@RequestParam(defaultValue="0") int categoryNo,
+			Model model) {
+		
+		logger.info("전문가 리스트, 파라미터 categoryNo={}", categoryNo);
+		
+		List<Map<String, Object>> list=findExpService.selectExpList(categoryNo);
+		
+		model.addAttribute("list", list);
+		
+		return "findexp/findexpList";
+	}
+	
 	@RequestMapping("/expDetail")
 	public String findexpDetail(@RequestParam(defaultValue="0") int expertNo,
 			Model model) {
@@ -55,6 +72,7 @@ public class FindExpController {
 		ExpertInfoVO expInfoVo=findExpService.selectExpInfo(expertNo);
 		ExpertVO expVo=findExpService.selectByExperNo(expertNo);
 		List<FieldDetailVO> fieldList=findExpService.selectFieldDetail(expertNo);
+		List<Map<String, Object>> expList=findExpService.selectExpList(expInfoVo.getCategoryNo());
 		logger.info("전문가 expVo={}", expVo);
 		logger.info("전문가 expInfoVo={}", expInfoVo);
 		logger.info("전문가 fieldList={}", fieldList);
@@ -62,6 +80,7 @@ public class FindExpController {
 		model.addAttribute("infoVo", expInfoVo);
 		model.addAttribute("expVo", expVo);
 		model.addAttribute("fieldList", fieldList);
+		model.addAttribute("expList", expList);
 		
 		return "findexp/expDetail";
 	}
@@ -81,12 +100,39 @@ public class FindExpController {
 	
 	@RequestMapping("/expDetailEdit")
 	public String expDetailEdit(@RequestParam(defaultValue="0") int expertNo,
-			Model model) {
+			HttpServletRequest request, Model model) {
 		
 		logger.info("전문가 상세페이지, 파라미터 expertNo={}", expertNo);
-		
 		ExpertInfoVO expInfoVo=findExpService.selectExpInfo(expertNo);
 		ExpertVO expVo=findExpService.selectByExperNo(expertNo);
+		
+		//파일 업로드 처리
+//		String fileName="", originName="";
+//		long fileSize=0;
+//		int pathFlag=ConstUtil.UPLOAD_IMAGE_FLAG;
+//		try {
+//			List<Map<String, Object>> fileList 
+//				= fileUploadUtil.fileUpload(request, pathFlag);
+//			for(int i=0;i<fileList.size();i++) {
+//				 Map<String, Object> map=fileList.get(i);
+//				 
+//				 fileName=(String) map.get("fileName");
+//				 originName=(String) map.get("originalFileName");
+//				 fileSize=(long) map.get("fileSize");				 
+//			}
+//			
+//			logger.info("파일 업로드 성공, fileName={}", fileName);
+//		} catch (IllegalStateException e) {
+//			e.printStackTrace();
+//		} catch (IOException e) {
+//			e.printStackTrace();
+//		}
+//		
+//		//2
+//		expInfoVo.setImageVideo(fileName);
+//		expInfoVo.setOriginalFilename(originName);
+//		expInfoVo.setFilesize(fileSize);
+		
 		List<FieldDetailVO> fieldList=findExpService.selectFieldDetail(expertNo);
 		logger.info("전문가 expVo={}", expVo);
 		logger.info("전문가 expInfoVo={}", expInfoVo);

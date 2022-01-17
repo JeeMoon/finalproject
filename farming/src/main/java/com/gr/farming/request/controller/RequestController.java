@@ -25,8 +25,9 @@ import com.gr.farming.common.ConstUtil;
 import com.gr.farming.common.FieldSearchVO;
 import com.gr.farming.common.FileUploadUtil;
 import com.gr.farming.common.PaginationInfo;
-import com.gr.farming.common.SearchVO;
+import com.gr.farming.common.SearchVO2;
 import com.gr.farming.field.model.FieldDetailVO;
+import com.gr.farming.findExp.model.ExpertInfoVO;
 import com.gr.farming.findExp.model.FindExpService;
 import com.gr.farming.member.model.MemberService;
 import com.gr.farming.request.model.FinalRequestVO;
@@ -181,9 +182,17 @@ public class RequestController {
 		fieldSearchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
 		logger.info("값 셋팅 후 fieldSearchVo={}", fieldSearchVo);
 		
+		ExpertInfoVO infoVo=findExpService.selectExpInfo(expertNo);
 		List<FieldDetailVO> fieldList=findExpService.selectFieldDetail(expertNo);
 		
-		List<Map<String, Object>> list=requestService.selectRequestList1(fieldSearchVo);
+		List<Map<String, Object>> list=null;
+		int cNo=infoVo.getCategoryNo();
+		if(cNo<15) {
+			list=requestService.selectRequestList1(fieldSearchVo);
+		}else if(cNo>=15) {
+			list=requestService.selectRequestList2(fieldSearchVo);
+		}
+		
 		logger.info("받은 요청 목록 조회 list={}", list);
 		logger.info("받은 요청 목록 조회 detail={}, list.size={}", fieldSearchVo.getDetail(),list.size());
 		
@@ -281,14 +290,64 @@ public class RequestController {
 		return "common/message";
 	}
 	
-	@RequestMapping("/requestByExpert")
-	public String requestByExpert(HttpSession session, Model model) {
+	@GetMapping("/myRequest")
+	public String myRequest(HttpSession session, Model model) {
+		
+		logger.info("견적요청 목록");
 		
 		int memberNo=(int) session.getAttribute("userNo");
 		
-		List<Map<String, Object>> list=requestService.selectFinalDetail(memberNo);
+		List<Map<String, Object>> list=requestService.selectMyRequestAll(memberNo);
+		logger.info("보낸 요청 list={}", list);
+		logger.info("보낸 요청 list.size={}", list.size());
 		
 		model.addAttribute("list", list);
+		
+		return "request/MyRequest";
+	}
+	
+	@RequestMapping("/requestByExpert")
+	public String requestByExpert(@RequestParam(defaultValue="0") int requestNo, 
+			@ModelAttribute SearchVO2 searchVo, HttpSession session, Model model) {
+		
+		logger.info("받은 견적 상세 목록 페이지, 파라미터 searchVo={}", searchVo);
+		int memberNo=(int) session.getAttribute("userNo");
+		searchVo.setMemNo(memberNo);
+		
+		
+		//[1] paginationInfo
+		PaginationInfo pagingInfo = new PaginationInfo();
+		pagingInfo.setBlockSize(ConstUtil.BLOCK_SIZE);
+		pagingInfo.setCurrentPage(searchVo.getCurrentPage());
+		pagingInfo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		
+		//[2] fieldSearchVo에 페이징에 필요한 값 세팅
+		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
+		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
+		logger.info("값 셋팅 후 SearchVo={}", searchVo);
+		
+		List<Map<String, Object>> list=requestService.selectFinalDetail(requestNo);
+		logger.info("전체조회 결과 list.size={}", list.size());
+		
+		RequestVO vo=requestService.selectReceivedRequest(requestNo);
+		logger.info("해당 견적정보 - vo={}", vo);
+		
+		int developNo=vo.getRequestDevelopNo();
+		int designNo=vo.getRequestDesignNo();
+		
+		Map<String, Object> myRequest=requestService.selectMyRequestDetail(requestNo);
+		List<Map<String, Object>> qList=requestService.selectQuestion(vo.getCategoryNo());
+		
+		int totalRecord=requestService.selectTotalRecord2(searchVo);
+		pagingInfo.setTotalRecord(totalRecord);
+		logger.info("받은 요청 목록 조회 수 - totalRecord={}", totalRecord);
+		
+		model.addAttribute("list", list);
+		model.addAttribute("pagingInfo", pagingInfo);
+		model.addAttribute("qList", qList);
+		model.addAttribute("map", myRequest);
+		model.addAttribute("developNo", developNo);
+		model.addAttribute("designNo", designNo);
 		
 		return "request/requestByExpert";
 	}

@@ -164,7 +164,7 @@ $(function(){
 						</c:if>
 						<c:if test="${!empty email }">
 							<c:if test="${user eq '사용자' }">
-								<li class="nav-item"><a class="nav-link" href="<c:url value='/request/requestByExpert'/>">받은견적</a>
+								<li class="nav-item"><a class="nav-link" href="<c:url value='/request/myRequest'/>">받은견적</a>
 								<li class="nav-item"><a class="nav-link" href="<c:url value='/chat/rooms'/>">채팅</a>
 								<li class="nav-item dropdown ms-2">
 									<a id="docsDropdownMenuLink"

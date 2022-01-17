@@ -73,6 +73,8 @@ public class FileUploadUtil {
 				path=ConstUtil.FILE_UPLOAD_PATH_TEST;
 			}else if(pathFlag==ConstUtil.UPLOAD_IMAGE_FLAG) {
 				path=ConstUtil.IMAGE_FILE_UPLOAD_PATH_TEST;
+			}else if(pathFlag==ConstUtil.UPLOAD_REQUSET_FLAG) {
+				path=ConstUtil.REQUSET_UPLOAD_PATH_TEST;
 			}
 			logger.info("type={}", ConstUtil.FILE_UPLOAD_TYPE);
 		}else {  //deploy
@@ -80,6 +82,8 @@ public class FileUploadUtil {
 				path=ConstUtil.FILE_UPLOAD_PATH;
 			}else if(pathFlag==ConstUtil.UPLOAD_IMAGE_FLAG) {
 				path=ConstUtil.IMAGE_FILE_UPLOAD_PATH;
+			}else if(pathFlag==ConstUtil.UPLOAD_REQUSET_FLAG) {
+				path=ConstUtil.REQUSET_UPLOAD_PATH_TEST;
 			}
 			logger.info("type={}", ConstUtil.FILE_UPLOAD_TYPE);
 			

@@ -153,12 +153,18 @@
           		</div>
           		<div class="py-3 mb-3">
           			<h6>파일 첨부</h6>
-          			<label class="file-uploader" style="width: 80px; height: 80px;">
-	            		<input class="file-uploader-input" type="file" name="upfile" id="upfile" mutiple>
-	           			<span class="slot-content"></span>
-	           		</label>
+          			<ul class="list-inline">
+          				<li class="list-inline-item listfl wh80">
+		          			<label class="file-uploader w-100 h-100" >
+			            		<input class="file-uploader-input" type="file" name="upfile" id="upfile" onchange="readURL(this);" >
+			           			<span class="slot-content"></span>
+			           		</label>
+		           		</li>
+		           		<li class="list-inline-item wh80" id="image_container">
+		           		</li>
+	           		</ul> 
           		</div>
-          		<div class="d-grid mb-4">
+          		<div class="d-grid mb-4" style="">
           			<button class="btn btn-primary btn-lg">견적 보내기</button>
           		</div>
           	</form>
@@ -166,4 +172,25 @@
         </div>
       </div>
     </div>
+ <script>
+ function readURL(input) {
+	  /* if (input.files && input.files[0]) {
+	    var reader = new FileReader();
+	    reader.onload = function(e) {
+	      document.getElementById('img').src = e.target.result;
+	    };
+	    reader.readAsDataURL(input.files[0]);
+	  } else {
+	    document.getElementById('img').src = "";
+	  } */
+	  var reader = new FileReader();
+	  reader.onload = function(e) {
+		var img = document.createElement('img');
+		img.setAttribute("src", event.target.result);
+		img.setAttribute("class", "thumb w-100 h-100");
+		document.querySelector("#image_container").appendChild(img);
+	  };
+	  reader.readAsDataURL(event.target.files[0]);
+} 
+ </script>
 <%@ include file="../inc/bottom.jsp"%>

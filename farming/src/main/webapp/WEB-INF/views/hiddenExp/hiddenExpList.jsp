@@ -2,7 +2,14 @@
     pageEncoding="UTF-8"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
-
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/expDetail.css">
+<script type="text/javascript">
+	$(function(){
+		var avg=$('#rate').val();
+		$('#starimg').css('width',avg*20+'%');
+	})
+</script>
 <section class="py-5">
       <div class="container">
         <div class="d-flex justify-content-between align-items-center flex-column flex-md-row mb-4">
@@ -26,20 +33,20 @@
 	</c:if>   
           <!-- venue item-->
           <c:if test="${!empty expList }">				
-			<c:forEach var="vo" items="${expList }">
+			<c:forEach var="map" items="${expList }">
 	          <div class="col-sm-6 col-lg-4 mb-5 hover-animate" data-marker-id="59c0c8e33b1527bfe2abaf92">
 	            <div class="card h-100 border-0 shadow">
 	              <div class="card-img-top overflow-hidden dark-overlay bg-cover" 
 	              style="background-image: url(${pageContext.request.contextPath }/resources/img/photo/restaurant-1430931071372-38127bd472b8.jpg); min-height: 200px;">
-	              <a class="tile-link" href="<c:url value='/findexp/expDetail?expertNo=${vo.expertNo }'/>"></a>
+	              <a class="tile-link" href="<c:url value='/findexp/expDetail?expertNo=${map[\'EXPERT_NO\']}'/>"></a>
 	                <div class="card-img-overlay-bottom z-index-20">
-	                  <h4 class="text-white text-shadow">${vo.name }</h4>
+	                  <h4 class="text-white text-shadow">${map['NAME'] }</h4>
 	                  <p class="mb-2 text-xs">
-	                  	<i class="fa fa-star text-warning"></i>
-	                  	<i class="fa fa-star text-warning"></i>
-	                  	<i class="fa fa-star text-warning"></i>
-	                  	<i class="fa fa-star text-warning"></i>
-	                  	<i class="fa fa-star text-gray-300"></i>
+	                  	<div id="starwrap">
+	                  		<input id="rate" type="hidden" value="${map['RATE'] }">
+							<div id="star"></div>
+							<div id="starimg"></div>
+						</div>
 	                  </p>
 	                </div>
 	                <div class="card-img-overlay-top d-flex justify-content-between align-items-center">
@@ -49,9 +56,9 @@
 	                </div>
 	              </div>
 	              <div class="card-body">
-	                <p class="text-sm text-muted mb-3"> Cupidatat excepteur non dolore laborum et quis nostrud veniam dolore deserunt. Pariatur dolore ut in elit id nulla. Irur...</p>
-	                <p class="text-sm text-muted text-uppercase mb-1">By <a href="#" class="text-dark">Matt Damon</a></p>
-	                <p class="text-sm mb-0"><a class="me-1" href="#">Restaurant,</a><a class="me-1" href="#">Contemporary</a>
+	                <p class="text-sm text-muted mb-3">${map['INTRO'] }</p>
+	                <p class="text-sm text-muted text-uppercase mb-1">위치 <a href="#" class="text-dark">${fn:substring(map['ADDRESS1'],0,6)}</a></p>
+	                <p class="text-sm mb-0">${map['EMP_COUNT'] }회 고용</a>
 	                </p>
 	              </div>
 	            </div>

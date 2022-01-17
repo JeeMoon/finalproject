@@ -4,7 +4,7 @@ import java.util.List;
 import java.util.Map;
 
 import com.gr.farming.common.FieldSearchVO;
-import com.gr.farming.field.model.FieldDetailVO;
+import com.gr.farming.common.SearchVO2;
 
 public interface RequestService {
 
@@ -25,12 +25,17 @@ public interface RequestService {
 	List<Map<String, Object>> selectFinalRequest(int expertNo);
 	
 	int selectTotalRecord(FieldSearchVO vo);
+	int selectTotalRecord2(SearchVO2 vo);
 	
 	//최종 견적 작성
 	int insertFinalRequest(FinalRequestVO vo);
 	int updateMatchA(int requestNo);
 	int updateMatchY(int requestNo);
 	
+	//내 요청서 조회(회원)
+	List<Map<String, Object>> selectMyRequestAll(int memberNo);
+	
 	//받은 견적 조회(회원)
-	List<Map<String, Object>> selectFinalDetail(int memberNo);
+	List<Map<String, Object>> selectFinalDetail(int requestNo);
+	Map<String, Object> selectMyRequestDetail(int requestNo);
 }

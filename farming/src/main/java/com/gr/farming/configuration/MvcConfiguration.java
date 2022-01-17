@@ -20,12 +20,11 @@ public class MvcConfiguration implements WebMvcConfigurer {
 		 registry.addInterceptor(new LoginInterceptor())
 		 .addPathPatterns("/chat/*", "/member/mypage/*", "/qna/qnaList");
 		 
-		 registry.addInterceptor(new ExpLoginInterceptor())
-
-		 .addPathPatterns("/expert/mypage/*", "/expert/addExp/*");
+		 registry.addInterceptor(new LoginInterceptor())
+		 .addPathPatterns("/request/**", "/request/**", "/reviewWrite");
 		 
 		 registry.addInterceptor(new ExpLoginInterceptor())
-		 .addPathPatterns("/request/**", "/request/**");
+		 .addPathPatterns("/expert/mypage/*", "/expert/addExp/*");
 		 
 		 registry.addInterceptor(new ExpLoginInterceptor())
 		 .addPathPatterns("/findexp/expDetailEdit", "/expert/mypage/*", "/expert/addExp/*");

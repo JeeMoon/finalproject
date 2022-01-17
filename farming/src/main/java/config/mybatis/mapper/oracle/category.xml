@@ -55,13 +55,6 @@
 		where main=#{main}
 	</select>
 	
-	
-	
-	
-	
-	
-	
-	
 	<select id="selectByDetail" parameterType="String" resultType="int">
 		select category_no from category
 		where detail=#{detail}
