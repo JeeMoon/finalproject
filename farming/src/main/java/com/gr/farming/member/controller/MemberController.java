@@ -193,7 +193,7 @@ public class MemberController {
 		boolean chk = pwdEncoder.matches(vo.getPwd(), memVo.getPwd());
 		logger.info("비번 확인, 파라미터 vo={}", vo);
 
-		String msg = "실패", url = "/member/mypage/checkpwd?email=" + vo.getEmail();
+		String msg = "비밀번호를 확인해주세요.", url = "/member/mypage/checkpwd?email=" + vo.getEmail();
 		if (chk) {
 			msg = "확인되었습니다.";
 			url = "/member/mypage/profile";

@@ -388,7 +388,7 @@ public class ExpertController {
 		boolean chk = pwdEncoder.matches(vo.getPwd(), exVo.getPwd());
 		logger.info("비번 확인, 파라미터 vo={}", vo);
 		
-		String msg="실패", url="/expert/mypage/checkpwd?email="+vo.getEmail();
+		String msg="비밀번호를 확인해주세요.", url="/expert/mypage/checkpwd?email="+vo.getEmail();
 		if(chk) {
 				msg="확인되었습니다.";
 				url="/expert/mypage/profile";
