@@ -37,7 +37,7 @@
 <body style="padding-top: 72px;">
     
     <!-- Hero Section-->
-    <section class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover" style="background-image: url('img/photo/restaurant-1515164783716-8e6920f3e77c.jpg');">
+    <section class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover" style="background-image: url('<c:url value='/resources/img/photo-1522143049013-2519756a52d4.jpg'/>');">
       <div class="container overlay-content">
       <ol class="breadcrumb ps-0  justify-content-center">
           <li class="breadcrumb-item"><a href="index.html">Home</a></li>
@@ -53,10 +53,10 @@
       </div>
     </section><br>
     <article>
-		<div class="container" role="main">
-    		<h2 class="text-shadow verified">${name}회원님 1 : 1 질문 내역</h2><br>
+		<div class="container" role="main" >
+    		<h2 class="text-shadow verified" style="margin-left:40%;">나의 1 : 1 질문 내역</h2><br>
 		
-			<div class="bg-white rounded shadow-sm">
+			<div class="bg-white rounded shadow-sm" style="width:1200px; margin-left:5%;">
 				<label for="exampleFormControlInput1" class="form-label">[문의글 제목] : </label>
 				<span> ${vo.title}</span> 
 			
@@ -69,28 +69,18 @@
 		
 		<div class="lastDiv">	
 			<label for="exampleFormControlInput1" class="form-label">[문의 내용]</label>		
-			<p class="content">${fn:replace(vo.content, newLine, "<br>")}</p>
-		</div><br>
-		<c:if test="${!empty list }">
-		
-		<!-- 댓글 -->
-		<div id="qcommentList">
-		  <ol class="list">
-		  <c:forEach var="map" items="${list }">
-		      <li>
-		        <p>
-		        작성자 : ${map['NAME']}<br />
-		        작성 날짜 :  <fmt:formatDate value="${map['REGDATE']}" pattern="yyyy-MM-dd" />
-		        </p>
-		
-		        <p>${map['CONTENT']}</p>
-		      </li>
-		      </c:forEach>
-		  </ol>
+			<p class="content" style="padding:1%">${fn:replace(vo.content, newLine, "<br>")}</p>
 		</div><br>
 		
-		</c:if>
-		<div class="divForm">
+		
+	</div><br>
+	<div class="center" style="margin-left:35%;">
+			<a class="btn btn-primary" href='<c:url value="/qna/qnaEdit?qnaNo=${param.qnaNo }"/>'>게시글 수정</a>&nbsp;&nbsp;
+        	<a class="btn btn-primary" href='<c:url value="/qna/qnaDelete?qnaNo=${param.qnaNo }"/>'>게시글 삭제</a>&nbsp;&nbsp;
+        	<a class="btn btn-primary" href='<c:url value="/qna/qnaList"/>'>게시글 목록</a>			
+		</div><br>
+		<section>
+		<div class="bg-white rounded shadow-sm" style="margin-left:5%; padding:1%; width:1200px;">
 		<form name="write" method="post" enctype="multipart/form-data"
 			action="<c:url value='/qna/qnaDetailQComment'/>" >
 			<input type="hidden" name="memberNo" id="memberNo" value="${userNo }">
@@ -99,19 +89,33 @@
 		 	<label for="exampleFormControlInput1" class="form-label">[댓글 입력]</label>
 		          <label for="name">작성자&nbsp;&nbsp;</label><input type="text" id="name" name="name" value="${name }" readonly="readonly" /><br>
 		        <div class="form-floating mb-3">
-				  <input type="text" class="form-control" id="floatingInput" name="content" placeholder="내용입력">
-				  <label for="content">댓글 입력</label>
+				  <input type="text" class="form-control" id="floatingInput" name="content" placeholder="내용입력" style="width:700px;">
+				  <label for="content">댓글 입력</label><br>
 				  <input type = "submit" class="btn btn-primary" value="등록하기"/>
 				</div>
 		</fieldset>
 		</form>
 		</div>
-	</div><br>
-		<div class="center">
-			<a class="btn btn-primary" href='<c:url value="/qna/qnaEdit?qnaNo=${param.qnaNo }"/>'>게시글 수정</a>
-        	<a class="btn btn-primary" href='<c:url value="/qna/qnaDelete?qnaNo=${param.qnaNo }"/>'>게시글 삭제</a>
-        	<a class="btn btn-primary" href='<c:url value="/qna/qnaList"/>'>게시글 목록</a>			
-		</div><br>
+		</section><br>
+		<c:if test="${!empty list }">
+		<!-- 댓글 -->
+		  		
+		  <c:forEach var="map" items="${list }">
+		  <div id="qcommentList" class="bg-white rounded shadow-sm" style="width:1200px; margin-left:5%;">
+		  		<div class="input-group">
+				  <span class="input-group-text">${map['NAME']}</span>
+				  <span aria-label="First name" class="form-control" style="width:900px;">${map['CONTENT']}</span>
+				  <span aria-label="Last name" class="form-control">
+				  	<fmt:formatDate value="${map['REGDATE']}" pattern="yyyy-MM-dd" />
+				  </span>
+				</div>
+		       
+			</div><br>
+		      </c:forEach>
+		
+		</c:if>
+		
+		
 	</article>
     
 <%@ include file="../inc/bottom.jsp" %>  

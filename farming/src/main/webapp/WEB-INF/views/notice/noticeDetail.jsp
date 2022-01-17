@@ -35,7 +35,7 @@
 <body style="padding-top: 72px;">
     
     <!-- Hero Section-->
-    <section class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover" style="background-image: url('img/photo/restaurant-1515164783716-8e6920f3e77c.jpg');">
+    <section class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover" style="background-image: url('<c:url value='/resources/img/faq.png'/>');">
       <div class="container overlay-content">
       <ol class="breadcrumb ps-0  justify-content-center">
           <li class="breadcrumb-item"><a href="../index">Home</a></li>
@@ -52,7 +52,7 @@
     </section><br>
     <article>
 		<div class="container" role="main">
-    		<h2 class="text-shadow verified">공지사항 내역</h2><br>
+    		<h2 class="text-shadow verified" style="margin-left:40%;">공지사항 내역</h2><br>
 		
 			<div class="bg-white rounded shadow-sm">
 				<label for="exampleFormControlInput1" class="form-label">[공지사항 제목] : </label>
@@ -71,10 +71,12 @@
 		</div><br>
 		
 	</div><br>
-		<div class="center">
-			<a class="btn btn-primary" href='<c:url value="/notice/noticeEdit?noticeNo=${param.noticeNo }"/>'>공지글 수정</a>
-        	<a class="btn btn-primary" href='<c:url value="/notice/noticeDelete?noticeNo=${param.noticeNo }"/>'>공지글 삭제</a>
-        	<a class="btn btn-primary" href='<c:url value="/notice/noticeList"/>'>공지글 목록</a>			
+		<div class="center" style="margin-left:35%;">
+			<c:if test="${user eq '관리자' }">
+			<a class="btn btn-primary"  href='<c:url value="/notice/noticeEdit?noticeNo=${param.noticeNo }"/>'>공지글 수정</a>&nbsp;&nbsp;
+        	<a class="btn btn-primary" href='<c:url value="/notice/noticeDelete?noticeNo=${param.noticeNo }"/>'>공지글 삭제</a>&nbsp;&nbsp;
+        	</c:if>
+        	<a class="btn btn-primary"  href='<c:url value="/notice/noticeList"/>'>공지글 목록</a>			
 		</div><br>
 	</article>
     

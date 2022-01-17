@@ -73,7 +73,7 @@
                 </div>
               </div>
             </div>
-          </div>
+          </div><br>
           </c:forEach>
           </c:if>
 
