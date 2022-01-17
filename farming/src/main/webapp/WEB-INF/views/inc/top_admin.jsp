@@ -23,11 +23,42 @@
     <link rel="icon" type="image/png" sizes="16x16" href="${pageContext.request.contextPath }/resources/img/farming-favicon.png">
     <!-- Custom CSS -->
     <link href="${pageContext.request.contextPath }/resources/admin_plugins/chartist/dist/chartist.min.css" rel="stylesheet">
+    <!-- Custom CSS jqplot -->
+    <link href="${pageContext.request.contextPath }/resources/admin_plugins/charts/dist/jquery.jqplot.css" rel="stylesheet" type="text/css" />
     <!-- Custom CSS -->
     <link href="${pageContext.request.contextPath }/resources/admin_css/style.min.css" rel="stylesheet">
     <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/css/style.default.css"
 	id="theme-stylesheet">
+	
+	
+	<!-- google charts -->
+	    <script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>
+    <script type="text/javascript">
+      google.charts.load('current', {'packages':['corechart']});
+      google.charts.setOnLoadCallback(drawChart);
+
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+          ['month', '일반회원', '전문가'],
+          ['2021. 10',  0,      0],
+          ['2021. 11',  0,      0],
+          ['2021. 12',  2,      1],
+          ['2022. 01',  5,      8]
+        ]);
+
+        var options = {
+          title: ' ',
+          curveType: 'function',
+          legend: { position: 'bottom' }
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('curve_chart'));
+
+        chart.draw(data, options);
+      }
+    </script>
+	
 </head>
 <!-- ============================================================== -->
     <script src="<c:url value='/resources/admin_plugins/jquery/dist/jquery.min.js'/>"></script>
@@ -51,7 +82,27 @@
     <script src="${pageContext.request.contextPath }/resources/admin_plugins/gmaps/jquery.gmaps.js"></script>
     <!--Custom JavaScript -->
     <script src="${pageContext.request.contextPath }/resources/admin_js/custom.js"></script>
-    
+  
+  	<!-- JQ-PLOT -->
+  	
+  	  <!-- JQ-PLOT의 기본 설정 -->
+  <script src='<c:url value="/resources/admin_plugins/charts/dist/jquery.jqplot.min.js" />' type="text/javascript"></script>
+  <!-- Highlighter(마우스 접근시 데이터정보 표시) 설정 -->
+  <script src='<c:url value="/resources/admin_plugins/charts/dist/plugins/jqplot.highlighter.js"/>' type="text/javascript"></script>
+  <!-- 좌표에 관한 정보나 Zoom 기능 사용시 설정 -->
+  <script src='<c:url value="/resources/admin_plugins/charts/dist/plugins/jqplot.cursor.js"/>' type="text/javascript"></script>
+  <!-- 축의 데이터를 날짜형태로 입력하기 위해서 설정 -->
+  <script src='<c:url value="/resources/admin_plugins/charts/dist/plugins/jqplot.dateAxisRenderer.js"/>' type="text/javascript"></script>
+  <!-- 축의 데이터의 Label Option을 설정 -->
+  <script src='<c:url value="/resources/admin_plugins/charts/dist/plugins/jqplot.canvasAxisLabelRenderer.js"/>' type="text/javascript"></script>
+  <!-- Legend(Line에대한 간단한 범례)의 Option을 설정 -->
+  <script src='<c:url value="/resources/admin_plugins/charts/dist/plugins/jqplot.enhanceLegendRenderer.js"/>' type="text/javascript"></script>
+  <!-- 축의 데이터를 순서에 상관없이 자동정렬을 설정 -->
+  <script src='<c:url value="/resources/admin_plugins/charts/dist/plugins/jqplot.categoryAxisRenderer.js"/>' type="text/javascript"></script>
+  <!-- 축의 데이터 표현설정과 그래프위의 점의 Option을 설정 -->
+  <script src='<c:url value="/resources/admin_plugins/charts/dist/plugins/jqplot.canvasAxisTickRenderer.js"/>' type="text/javascript"></script> 
+
+
 <body>
     <div class="preloader">
         <div class="lds-ripple">
