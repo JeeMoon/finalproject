@@ -31,6 +31,8 @@
 			<h3><strong>수정하기</strong></h3><br>
 			<div class="divForm">
 					<form name="frmEdit" method="post" enctype="multipart/form-data" action="<c:url value='/knowhow/edit?knowhowNo=${vo.knowhowNo}'/>"> 
+
+<%-- 	<input type="hidden" name="knowhowNo" value="${param.knowhowNo}"> --%>
 				        <ul class="mb50">
 				        	<li>    
 				            	<label for="title" class="sp1">제목</label>

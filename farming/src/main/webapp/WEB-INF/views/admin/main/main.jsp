@@ -75,16 +75,20 @@ $(document).ready(function() {
                         </div>
                     </div>
                 </div>
+                    
                 <div class="row">
                     <!-- column -->
                     <div class="col-sm-12">
                         <div class="card">
                             <div class="card-body">
-                                <h4 class="card-title">Revenue Statistics</h4>
+                                <h4 class="card-title">회원가입 통계지표</h4>
                                 <div class="flot-chart">
-                                    <div class="flot-chart-content " id="flot-line-chart"
+                                    <!-- <div class="flot-chart-content " id="flot-line-chart"
                                         style="padding: 0px; position: relative;">
                                         <canvas class="flot-base w-100" height="400"></canvas>
+                                    </div> -->
+                                    <div class="flot-chart-content " id="curve_chart" style="padding: 0px; position: relative;">
+                                    	<canvas class="flot-base w-100" height="400"></canvas>
                                     </div>
                                 </div>
                             </div>
