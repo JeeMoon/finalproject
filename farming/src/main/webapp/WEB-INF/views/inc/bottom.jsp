@@ -35,7 +35,7 @@
             <div class="col-lg-2 col-md-6 mb-5 mb-lg-0">
               <h6 class="text-uppercase text-dark mb-3">고객센터</h6>
               <ul class="list-unstyled">
-                <li><a class="text-muted" href="<c:url value='/qna/qnaList'/>">공지사항</a></li>
+                <li><a class="text-muted" href="<c:url value='/notice/noticeList'/>">공지사항</a></li>
                 <li><a class="text-muted" href="<c:url value='/qna/qnaMain'/>">자주묻는질문</a></li>
               </ul>
             </div>
