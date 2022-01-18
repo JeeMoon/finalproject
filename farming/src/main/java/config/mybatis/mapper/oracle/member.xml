@@ -82,8 +82,13 @@
 	<select id="selectTotalRecord" parameterType="searchVo" resultType="int">
 		select count(*) from member
 		<!-- <include refid="searchWhere"></include>	 -->
+		
 	</select>
-   
+	
+<!-- 	<select id="selectTotalRecords" parameterType="searchVo" resultType="int">
+			select count(*) from member
+			where To_char(regdate, 'YYYYMMDD') <= '20211231'
+	</select>    -->
 </mapper>
 
 
