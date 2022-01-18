@@ -25,9 +25,6 @@
                                 </ol>
                             </nav>
                         </div>
-                        <div class="col-lg-6 text-lg-end">
-                        	<button class="btn btn-primary me-2" id="excel"><i class="far fa-file-excel me-2"></i> Download EXCEL</button>
-                        </div>
                     </div>
                     
                 </div>

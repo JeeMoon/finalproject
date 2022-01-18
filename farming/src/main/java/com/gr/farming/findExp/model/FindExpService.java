@@ -14,4 +14,5 @@ public interface FindExpService {
 	ExpertVO selectByExperNo(int expertNo);
 	List<FieldDetailVO> selectFieldDetail(int expertNo);
 	int updateExpInfo(ExpertInfoVO vo);
+	List<Map<String, Object>> selectExpList(int categoryNo);
 }

@@ -1,65 +1,58 @@
-<%@ page language="java" contentType="text/html; charset=utf-8"
-    pageEncoding="utf-8"%>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>    
-<!DOCTYPE html>
-<html lang="ko">
-<head>
-<meta charset="utf-8">
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/mainstyle.css'/>" />
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/clear.css'/>" />
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/formLayout.css'/>" />
-<link rel="stylesheet" type="text/css" href="<c:url value='/resources/css/mystyle.css'/>" />
-
-<title>노하우 게시판 - 답변</title>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<%@ include file="../inc/top.jsp" %>
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/style.knowhow.css">
+<link rel="stylesheet"
+	href="${pageContext.request.contextPath }/resources/css/style.knowhows.css">
 <script type="text/javascript" src="<c:url value='/resources/js/jquery-3.6.0.min.js'/>"></script>
-<script type="text/javascript">
-	$(function(){
-		$('form[name=frmWrite]').submit(function(){
-			$('.infobox').each(function(idx, item){
-				if($(this).val().length<1){
-					alert($(this).prev().html() + "을(를) 입력하세요");
-					$(this).focus();
-					event.preventDefault();
-					return false;  //each 탈출
-				}
-			});
-		});
-		
-		$('#btList').click(function(){
-			location.href="<c:url value='/knowhow/list'/>";	
-		});
-		
-	});
-</script>
 
-</head>
-<body>
-<div class="divForm">
-<form name="frmWrite" method="post" 
-	action="<c:url value='/knowhow/reply'/>" >
-     <input type="text" name="groupNo" value="${vo.groupNo }" /> 
-     <input type="text" name="step" value="${vo.step }" /> 
-     <input type="text" name="sortNo" value="${vo.sortNo }" /> 
-	
- <fieldset>
-	<legend>답변하기</legend>
-        <div class="firstDiv">
-            <label for="title">제목</label>
-            <input type="text" id="title" name="title" class="infobox" 
-            	value="Re : ${vo.title}" />
+<style type="text/css">
+	body{
+		padding:5px;
+		margin:5px;
+	 }
+</style>  
+<body style="padding-top: 72px;">
+    
+    <!-- Hero Section-->
+    <section class="pt-7 pb-5 d-flex align-items-end dark-overlay bg-cover" style="background-image: url('img/photo/restaurant-1515164783716-8e6920f3e77c.jpg');">
+      <div class="container overlay-content">
+        <div class="d-flex justify-content-between align-items-start flex-column flex-lg-row align-items-lg-end">
+          <div class="text-white mb-4 mb-lg-0">
+            <div class="badge badge-pill badge-transparent px-3 py-2 mb-4">Knowledge</div>
+            <h1 class="text-shadow verified">노하우 게시판</h1>
+          </div>
         </div>
-        <div>  
-        	<label for="content">내용</label>        
- 			<textarea id="content" name="content" rows="12" cols="40"></textarea>
-        </div>        
-        <div class="center">
-            <input type = "submit" value="답변"/>
-            <input type = "Button" id="btList" value="글목록" />         
-        </div>
-    </fieldset>
-</form>
-</div>   
+      </div>
+    </section>
+    
+	<section class="section_padding">
+		<div class="container">
+			<h3><strong>답변하기</strong></h3><br>
+			<div class="divForm">
+					<form name="frmEdit" method="post" enctype="multipart/form-data" action="<c:url value='/knowhow/reply?knowhowNo=${vo.knowhowNo}'/>"> 
+				    <input type="hidden" name="groupNo" value="${vo.groupNo }" /> 
+				    <input type="hidden" name="step" value="${vo.step }" /> 
+				    <input type="hidden" name="sortNo" value="${vo.sortNo }" /> 
+				        <ul class="mb50">
+				        	<li>  
+				            	<label for="title" class="sp1">제목</label>
+				            	<input type="text" id="title" name="title" value="Re : ${vo.title}" class="t_input sp2" />
+				        	</li>
+					        <li>
+					        	<label for="content" class="sp1">내용</label>        
+					 			<textarea id="content" name="content" rows="12" cols="60" class="sp2"></textarea>
+					        </li>
+						    <div class="t_center">
+					            <input type = "submit" class="btn btn-primary" value="SUBMIT"/>
+					            <input type = "Button" class="btn btn-primary2" value="글목록" onclick="location.href	='<c:url value="/knowhow/list"/>'" />        
+						    </div>
+				        </ul>  
+				    </form>
+			</div>
+		</div>
+	</section>
 
-              
-</body>
-</html>
+    
+<%@ include file="../inc/bottom.jsp" %>  

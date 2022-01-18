@@ -11,12 +11,19 @@
 		<selectKey keyProperty="reviewNo" resultType="int" order="BEFORE">
 			select review_seq.nextval from dual
 		</selectKey>
-		insert into review(review_no, expert_no, member_no, content, rate, file_name, name)
+		insert into review(REVIEW_NO, EXPERT_NO, MEMBER_NO, CONTENT, RATE, FILE_NAME, NAME)
 		values(#{reviewNo}, #{expertNo}, #{memberNo}, #{content}, #{rate}, #{fileName}, #{name})
 	</insert>
 	
 	<select id="selectReviewAvg" parameterType="int" resultType="float">
-		select avg(rate) from review
+		select round(avg(rate),1) from review
 		where expert_no=#{expertNo}
 	</select>
+	
+	<update id="updateRate" parameterType="int">
+		update expert_info
+		set rate=(select round(avg(rate),1) from review
+				where expert_no=#{expertNo})
+		where expert_no=#{expertNo}
+	</update>
 </mapper>

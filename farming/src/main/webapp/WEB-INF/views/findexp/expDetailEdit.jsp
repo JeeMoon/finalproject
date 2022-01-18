@@ -3,6 +3,8 @@
 <%@ include file="../inc/top.jsp" %>
 <link rel="stylesheet"
 	href="${pageContext.request.contextPath }/resources/css/expDetail.css">
+<link rel="stylesheet"
+href="${pageContext.request.contextPath }/resources/css/request.css">
 <style>
 .btEdit + input{display:none}
 #btEdit1 + input{display:none}
@@ -11,18 +13,9 @@
 #btEdit4 + div#payMethod{display:none}
 #btEdit5 + .select_box{display:none}
 #btEdit6 + .select_box{display:none}
-#btEdit7 ~ div.imgBox{display:none}
-#btEdit8 ~ div.imgBox{display:none}
+#btEdit7 ~ ul{display:none}
+#btEdit8 ~ label{display:none}
 #btEdit9 + .radio_box{display:none}
-
-.thumb {
-	width:5rem;
-	height:5rem;
-	border-radius: 8px;
-    border: 0.0625rem solid #f2f2f2;
-    cursor: pointer;
-    background: url(data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyMCIgaGVpZ2h0PSIyMCI+PGcgZmlsbD0iI0I1QjVCNSIgZmlsbC1ydWxlPSJldmVub2RkIj48cGF0aCBkPSJNOSAwaDJ2MjBIOXoiLz48cGF0aCBkPSJNMCAxMVY5aDIwdjJ6Ii8+PC9nPjwvc3ZnPg==) no-repeat 50%,#f2f2f2;
-}
 
 .select_box{
  	position:relative;
@@ -42,24 +35,8 @@
 </style>
 
 <section>
-      <!-- Slider main container-->
-      <div class="swiper-container detail-slider slider-gallery">
-        <!-- Additional required wrapper-->
-        <div class="swiper-wrapper">
-          <!-- Slides-->
-          <div class="swiper-slide"><a href="${pageContext.request.contextPath }/resources/img/photo/photo-1426122402199-be02db90eb90.jpg" data-toggle="gallery-top" title="Our street"><img class="img-fluid" src="${pageContext.request.contextPath }/resources/img/photo/photo-1426122402199-be02db90eb90.jpg" alt="Our street"></a></div>
-          <div class="swiper-slide"><a href="${pageContext.request.contextPath }/resources/img/photo/photo-1512917774080-9991f1c4c750.jpg" data-toggle="gallery-top" title="Outside"><img class="img-fluid" src="${pageContext.request.contextPath }/resources/img/photo/photo-1512917774080-9991f1c4c750.jpg" alt="Outside"></a></div>
-          <div class="swiper-slide"><a href="${pageContext.request.contextPath }/resources/img/photo/photo-1494526585095-c41746248156.jpg" data-toggle="gallery-top" title="Rear entrance"><img class="img-fluid" src="${pageContext.request.contextPath }/resources/img/photo/photo-1494526585095-c41746248156.jpg" alt="Rear entrance"></a></div>
-          <div class="swiper-slide"><a href="${pageContext.request.contextPath }/resources/img/photo/photo-1484154218962-a197022b5858.jpg" data-toggle="gallery-top" title="Kitchen"><img class="img-fluid" src="${pageContext.request.contextPath }/resources/img/photo/photo-1484154218962-a197022b5858.jpg" alt="Kitchen"></a></div>
-          <div class="swiper-slide"><a href="${pageContext.request.contextPath }/resources/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" data-toggle="gallery-top" title="Bedroom"><img class="img-fluid" src="${pageContext.request.contextPath }/resources/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" alt="Bedroom"></a></div>
-          <div class="swiper-slide"><a href="${pageContext.request.contextPath }/resources/img/photo/photo-1488805990569-3c9e1d76d51c.jpg" data-toggle="gallery-top" title="Bedroom"><img class="img-fluid" src="${pageContext.request.contextPath }/resources/img/photo/photo-1488805990569-3c9e1d76d51c.jpg" alt="Bedroom"></a></div>
-        </div>
-        <div class="swiper-pagination swiper-pagination-white"></div>
-        <div class="swiper-button-prev swiper-button-white"></div>
-        <div class="swiper-button-next swiper-button-white"></div>
-      </div>
     </section>
-    <c:if test="${expVo.expertNo eq expNo }">
+    <c:if test="${expVo.expertNo eq userNo }">
     <div class="container py-5">
       <div class="row">
         <div class="col-lg-8"> 
@@ -71,7 +48,7 @@
         <div class="tab-content py-5 px-3">
 	        <!-- 1. 한줄 소개 -->
 	        <div class="text-block row">
-	        	<input type="hidden" name="expertNo" value="${expNo }">
+	        	<input type="hidden" name="expertNo" value="${userNo }">
 	          <h1 class="mb-4">${expVo.name }</h1>
 	          <h6 class="mb-3 col-md-8">한줄 소개</h6>
 	          	<a id="btEdit1" class="btEdit text-primary col-md-4 d-md-flex align-items-center justify-content-end"
@@ -250,16 +227,20 @@
 	          	<a id="btEdit7" class="mb-2 btEdit text-primary col-md-4 d-md-flex align-items-center justify-content-end"
 	          		>수정</a>
 	            <p class="text-body small">허위정보에 대한 모든 책임은 본인에게 있습니다</p>
-	          		<div class="imgBox">
-	           		<!-- <div class="thumb"></div> -->
-	           		<div>
-	            		<input type="file" name="businessLicense" id="businessLicense">
-	           		</div>
-		        </div>
+           		<ul class="list-inline">
+        			<li class="list-inline-item listfl wh80">
+	          			<label class="file-uploader w-100 h-100" >
+		            		<input class="file-uploader-input" type="file" name="businessLicense" id="businessLicense" onchange="readURL(this);" >
+		           			<span class="slot-content"></span>
+		           		</label>
+	           		</li>
+	           		<li class="list-inline-item wh80" id="image_container">
+	           		</li>
+           		</ul> 
 	           	<c:if test="${infoVo.businessLicense!='N'}">
-		            <p id="infoBox7" class="btEdit text-muted fw-light">${infoVo.businessLicense}</p>
-		            <img src="<c:url value='/resources/pd_images/${infoVo.businessLicense }'/>"
-	 				border="0" width="150">
+		            <p id="infoBox7" class="btEdit text-muted fw-light">
+		            	<img src="<c:url value='/resources/pd_images/${infoVo.businessLicense }'/>"
+	 				border="0" width="150"></p>
 		        </c:if>
 	         </div>
 	         
@@ -269,9 +250,11 @@
 	          	<a id="btEdit8" class="mb-2 text-primary col-md-4 d-md-flex align-items-center justify-content-end"
 	          		>수정</a>
 	          	<p class="text-body small">허위정보에 대한 모든 책임은 본인에게 있습니다</p>
-	          	<div class="imgBox">
-	          		<div class="thumb"></div>
-	        </div>
+	          	<label class="file-uploader" style="width: 80px; height: 80px;">
+            		<input class="file-uploader-input" type="file" name="businessLicense" id="businessLicense">
+           			<span class="slot-content"></span>
+           		</label>
+	          	<div class="imgBox"></div>
 	          	<c:if test="${!empty infoVo.license}">	
 	           	<input class="form-control mb-sm-4" type="text" name="license" value="${infoVo.license }">
 	            <p id="infoBox8" class="text-muted fw-light">${infoVo.license}</p>
@@ -344,6 +327,16 @@
     </div>
    </c:if>
 <script>
+	function readURL(input) {
+		  var reader = new FileReader();
+		  reader.onload = function(e) {
+			var img = document.createElement('img');
+			img.setAttribute("src", event.target.result);
+			img.setAttribute("class", "thumb w-100 h-100");
+			document.querySelector("#image_container").appendChild(img);
+		  };
+		  reader.readAsDataURL(event.target.files[0]);
+	} 	
 	
 	$(function(){
 		textchange=false;
@@ -515,7 +508,7 @@
 					});
 				})
 			}
-			$(this).siblings('div.imgBox').toggle();
+			$(this).siblings('ul').toggle();
 			//$(this).siblings('p').toggle();
 		});
 		$('#btEdit8').click(function(){
@@ -538,7 +531,7 @@
 					});
 				})
 			}
-			$(this).siblings('div.imgBox').toggle();
+			$(this).siblings('label').toggle();
 			//$(this).siblings('p').toggle();
 		});
 		

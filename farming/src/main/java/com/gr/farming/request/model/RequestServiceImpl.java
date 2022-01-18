@@ -7,7 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.gr.farming.common.FieldSearchVO;
-import com.gr.farming.field.model.FieldDetailVO;
+import com.gr.farming.common.SearchVO2;
 
 @Service
 public class RequestServiceImpl implements RequestService{
@@ -48,23 +48,73 @@ public class RequestServiceImpl implements RequestService{
 }
 
 	@Override
-	public List<Map<String, Object>> selectReceivedRequest(int expertNo) {
-		return requestDao.selectReceivedRequest(expertNo);
-	}
-
-	@Override
-	public List<Map<String, Object>> selectRequestDetail1(FieldSearchVO vo) {
-		return requestDao.selectRequestDetail1(vo);
-	}
-	
-	@Override
-	public List<Map<String, Object>> selectRequestDetail2(FieldSearchVO vo) {
-		return requestDao.selectRequestDetail2(vo);
+	public RequestVO selectReceivedRequest(int requestNo) {
+		return requestDao.selectReceivedRequest(requestNo);
 	}
 
 	@Override
 	public int selectTotalRecord(FieldSearchVO vo) {
 		return requestDao.selectTotalRecord(vo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectRequestList1(FieldSearchVO vo) {
+		return requestDao.selectRequestList1(vo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectRequestList2(FieldSearchVO vo) {
+		return requestDao.selectRequestList2(vo);
+	}
+
+	@Override
+	public Map<String, Object> selectRequestDetail1(RequestVO vo) {
+		return requestDao.selectRequestDetail1(vo);
+	}
+
+	@Override
+	public Map<String, Object> selectRequestDetail2(RequestVO vo) {
+		return requestDao.selectRequestDetail2(vo);
+	}
+
+	@Override
+	public int insertFinalRequest(FinalRequestVO vo) {
+		return requestDao.insertFinalRequest(vo);
+	}
+
+	@Override
+	public int updateMatchA(int requestNo) {
+		return requestDao.updateMatchA(requestNo);
+	}
+
+	@Override
+	public int updateMatchY(int requestNo) {
+		return requestDao.updateMatchY(requestNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectFinalDetail(int requestNo) {
+		return requestDao.selectFinalDetail(requestNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectFinalRequest(int expertNo) {
+		return requestDao.selectFinalRequest(expertNo);
+	}
+
+	@Override
+	public int selectTotalRecord2(SearchVO2 vo) {
+		return requestDao.selectTotalRecord2(vo);
+	}
+
+	@Override
+	public Map<String, Object> selectMyRequestDetail(int requestNo) {
+		return requestDao.selectMyRequestDetail(requestNo);
+	}
+
+	@Override
+	public List<Map<String, Object>> selectMyRequestAll(int memberNo) {
+		return requestDao.selectMyRequestAll(memberNo);
 	}
 
 

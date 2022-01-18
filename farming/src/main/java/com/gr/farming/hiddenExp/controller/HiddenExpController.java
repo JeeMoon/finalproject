@@ -1,6 +1,7 @@
 package com.gr.farming.hiddenExp.controller;
 
 import java.util.List;
+import java.util.Map;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -55,7 +56,7 @@ public class HiddenExpController {
 		
 		logger.info("리스트 조회, 파라미터 keyword={}", keyword);
 		
-		List<ExpertVO> expList=HEService.selectByAddress(keyword);
+		List<Map<String, Object>> expList=HEService.selectByAddress(keyword);
 		logger.info("검색 조회 결과, expList.size={}", expList.size());
 		logger.info("검색 조회 결과, expList={}", expList);
 		

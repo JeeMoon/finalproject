@@ -117,7 +117,7 @@
               
               <div class="row form-block flex-column flex-sm-row">
             	<div class="col text-center text-sm-start"><input type="button" value="  뒤로가기  " class="btn btn-outline-mute" id="prev"></div>
-            	<div class="col text-center text-sm-end" id="submit"><input type="submit" value="    수정    " class="btn btn-primary px-3"></div>
+            	<div class="col text-center text-sm-end"><input type="submit" value="    수정    " class="btn btn-primary px-3" id="edit"></div>
 	         </div>
             </form>
             </div>

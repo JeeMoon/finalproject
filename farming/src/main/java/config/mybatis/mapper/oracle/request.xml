@@ -51,21 +51,62 @@
 	</select>
 	
 	<!-- 전문가회원 - 받은 요청서 목록 조회 -->
-	<select id="selectReceivedRequest" parameterType="int" resultType="map">
+	<select id="selectReceivedRequest" parameterType="int" resultType="requestVo">
 		select * from request
+		where request_no=#{requestNo}
+	</select>
+	<select id="selectFinalRequest" parameterType="int" resultType="map">
+		select * from final_detail
 		where expert_no=#{expertNo}
 	</select>
 	
 	<!-- 전문가회원 - 받은 요청서 각 문답 조회 -->
-	<select id="selectRequestDetail1" parameterType="fieldSearchVo" resultType="map">
-		select * from req_detail_develop
-		where expert_no=#{userNo} and detail like '%' || #{detail} || '%'
-		order by request_no desc
+	<select id="selectRequestList1" parameterType="fieldSearchVo" resultType="map">
+		select *
+		from
+		(
+		    select rownum as RNUM, A.*
+		    from
+		    (
+				select * from req_detail_develop
+				where expert_no=#{userNo} 
+				<if test="detail!=null and detail!=''">
+					and detail like '%' || #{detail} || '%'
+				</if>
+				order by request_no desc
+			)A
+		)
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} 
+			and RNUM<=#{firstRecordIndex}+ #{recordCountPerPage}]]>
 	</select>
-	<select id="selectRequestDetail12" parameterType="fieldSearchVo" resultType="map">
+	<select id="selectRequestList2" parameterType="fieldSearchVo" resultType="map">
+		select *
+		from
+		(
+		    select rownum as RNUM, A.*
+		    from
+		    (
+				select * from req_detail_design
+				where expert_no=#{userNo} 
+				<if test="detail!=null and detail!=''">
+					and detail like '%' || #{detail} || '%'
+				</if>
+				order by request_no desc
+			)A
+		)
+		<![CDATA[
+		where RNUM>#{firstRecordIndex} 
+			and RNUM<=#{firstRecordIndex}+ #{recordCountPerPage}]]>
+	</select>
+	
+	<select id="selectRequestDetail1" parameterType="requestVo" resultType="map">
+		select * from req_detail_develop
+		where request_no=#{requestNo} and expert_no=#{expertNo}
+	</select>
+	<select id="selectRequestDetail2" parameterType="requestVo" resultType="map">
 		select * from req_detail_design
-		where expert_no=#{userNo} and detail like '%' || #{detail} || '%'
-		order by request_no desc
+		where request_no=#{requestNo} and expert_no=#{expertNo}
 	</select>
 	
 	<select id="selectTotalRecord" parameterType="fieldSearchVo" resultType="int">
@@ -73,8 +114,64 @@
 		where expert_no=#{userNo}
 		<if test="detail!=null and detail!=''">
 			and detail=#{detail}
-			<!-- 파라미터 하나인데 타입 string 안됨, 
-			동적sql에서는 string, int 불가, vo, map만 가능 -->
 		</if> 
 	</select>
+	
+	<!-- 최종견적 작성 -->
+	<insert id="insertFinalRequest" parameterType="finalRequestVo">
+		<selectKey keyProperty="finalRequestNo" resultType="int" order="BEFORE">
+			select FINAL_REQ_SEQ.nextval from dual
+		</selectKey>
+		insert into FINAL_REQUEST(FINAL_REQUEST_NO, CATEGORY_NO, MEMBER_NO, EXPERT_NO,
+			REQUEST_NO, COST, TYPE, EXPLAIN, FILENAME,
+			ORIGINAL_FILENAME, FILESIZE)
+		values(#{finalRequestNo}, #{categoryNo}, #{memberNo}, #{expertNo}, 
+			#{requestNo}, #{cost}, #{type}, 
+			#{explain}, #{filename}, #{originalFilename}, #{filesize})
+	</insert>
+	
+	<!-- 최종견적 작성 후 매칭결과 변경 
+		A : 최종견적 발송됨
+		Y : 결제 완료
+	 -->
+	<update id="updateMatchA" parameterType="int">
+		update request
+		set match='A'
+		where request_no=#{requestNo}
+	</update>
+	<update id="updateMatchY" parameterType="int">
+		update final_request
+		set STATE='Y'
+		where request_no=#{requestNo}
+	</update>
+	
+	<!-- 일반회원의 내가 보낸 견적요청 조회 -->
+	<select id="selectMyRequestAll" parameterType="int" resultType="map">
+		select c.main, c.detail, r.* from request r left join category c
+		on r.category_no=c.category_no
+		where member_no=#{memberNo}
+		order by request_no desc
+	</select>
+	
+	<select id="selectMyRequestDetail" parameterType="int" resultType="map">
+		select * from request r join request_develop rd
+		on r.request_develop_no=rd.request_develop_no
+		where request_no=#{request_no}
+	</select>
+	
+	<!-- 일반회원의 받은 견적 조회 -->
+	<select id="selectFinalDetail" parameterType="int" resultType="map">
+		select * from final_detail
+		where request_no=#{request_no}
+	</select>
+	
+	<select id="selectTotalRecord2" parameterType="searchVo2" resultType="int">
+		select count(*) from final_detail
+		where member_no=#{memNo}
+		<!-- <if test="detail!=null and detail!=''">
+			and detail=#{detail}
+		</if> --> 
+	</select>
+	
+	
 </mapper>

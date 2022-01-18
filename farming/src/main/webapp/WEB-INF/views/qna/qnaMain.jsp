@@ -13,7 +13,14 @@
           <div class="col-xl-8 mx-auto">
           	<form><p class="text-muted mb-4">파밍을 이용하시면서 궁금하신 점들을 언제든지 검색해보세요.</p>
           <div class="input-group">
-          	<input class="form-control" type="text" placeholder="이곳에 입력하기 ... "><button class="btn btn-primary" type="submit">
+          	<input class="form-control" type="text" placeholder="이곳에 입력하기 ... " list="qnaList">
+          	<datalist id="qnaList">
+          		<option value="파밍의 첫걸음" />
+          		<option value="IT 전문가 가이드" />
+          		<option value="1:1 질문 게시판" />
+          	</datalist>
+          	
+          	<button class="btn btn-primary" type="submit">
           	<i class="fa fa-search"></i></button>
           	</div>
           	</form>

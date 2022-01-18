@@ -1,6 +1,7 @@
 package com.gr.farming.findExp.model;
 
 import java.util.List;
+import java.util.Map;
 
 import org.apache.ibatis.annotations.Mapper;
 
@@ -15,4 +16,6 @@ public interface FindExpDAO {
 	ExpertVO selectByExperNo(int expertNo);
 	List<FieldDetailVO> selectFieldDetail(int expertNo);
 	int updateExpInfo(ExpertInfoVO vo);
+	
+	List<Map<String, Object>> selectExpList(int categoryNo);
 }
