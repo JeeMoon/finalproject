@@ -125,7 +125,7 @@
             </div>
             <div class="swiper-slide h-auto px-2">
               <div class="card card-poster gradient-overlay hover-animate mb-4 mb-lg-0"><a class="tile-link" 
-              	href="<c:url value='/request/request?categoryNo=2'/>"></a><img class="bg-image" src="${pageContext.request.contextPath }/resources/img/photo/game3.jpg" alt="Card image">
+              	href="<c:url value='/request/request?categoryNo=1'/>"></a><img class="bg-image" src="${pageContext.request.contextPath }/resources/img/photo/game3.jpg" alt="Card image">
                 <div class="card-body overlay-content">
                   <h6 class="card-title text-shadow text-uppercase">게임 개발</h6>
                   <p class="card-text text-sm">Game Development</p>
@@ -134,7 +134,7 @@
             </div>
             <div class="swiper-slide h-auto px-2">
               <div class="card card-poster gradient-overlay hover-animate mb-4 mb-lg-0"><a class="tile-link" 
-              	href="<c:url value='/request/request?categoryNo=3'/>"></a><img class="bg-image" src="${pageContext.request.contextPath }/resources/img/photo/app1.png" alt="Card image">
+              	href="<c:url value='/request/request?categoryNo=2'/>"></a><img class="bg-image" src="${pageContext.request.contextPath }/resources/img/photo/app1.png" alt="Card image">
                 <div class="card-body overlay-content">
                   <h6 class="card-title text-shadow text-uppercase">IOS 개발</h6>
                   <p class="card-text text-sm">IOS Development</p>
