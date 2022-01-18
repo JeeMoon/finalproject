@@ -61,7 +61,7 @@ public class KnowHowController {
 		//[2] searchVo에 값 셋팅
 		searchVo.setRecordCountPerPage(ConstUtil.RECORD_COUNT);
 		searchVo.setFirstRecordIndex(pagingInfo.getFirstRecordIndex());
-		searchVo.setExpertNo((int)session.getAttribute("userNo")); 
+		/* searchVo.setExpertNo((int)session.getAttribute("userNo")); */
 		logger.info("값 셋팅 후 searchVo={}", searchVo);	
 		
 		List<KnowHowVO> list = knowhowService.selectKnowhowAll(searchVo);
