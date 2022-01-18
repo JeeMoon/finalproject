@@ -8,7 +8,7 @@
 		insert into orders(merchant_uid, member_no, member_name, expert_no, expert_name, service_no, service_name, price, state)
 		values(#{merchantUid}, #{memberNo}, #{memberName}, #{expertNo}, #{expertName}, #{serviceNo}, #{serviceName}, #{price}, #{state})
 	</insert>
-	 
+	
 	
 	<select id="select" parameterType="searchVo" resultType="orderVo">
 	  select *
