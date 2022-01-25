@@ -10,18 +10,15 @@
 	}
 </style>
 <script type="text/javascript" src="https://cdn.iamport.kr/js/iamport.payment-1.1.5.js"></script>
-<script type="text/javascript">
-
-</script>
     <section class="py-5 p-print-0">
       <div class="container">
         <div class="row mb-4 d-print-none">
           <div class="col-lg-6">
             <!-- Breadcrumbs -->
             <ol class="breadcrumb ps-0  justify-content-start">
-              <li class="breadcrumb-item"><a href="index.html">서비스이름</a></li>
-              <li class="breadcrumb-item"><a href="user-account.html">Account</a></li>
-              <li class="breadcrumb-item active">현재날짜   </li>
+              <li class="breadcrumb-item"><a href="index.html">${categoryVo.main }</a></li>
+              <li class="breadcrumb-item"><a href="user-account.html">${categoryVo.detail }</a></li>
+              <li class="breadcrumb-item active">결제하기</li>
             </ol>
           </div>
           <div class="col-lg-6 text-lg-end">
@@ -34,8 +31,8 @@
             <div class="row">
               <div class="col-6 d-flex align-items-center"><img src="${pageContext.request.contextPath }/resources/img/farming-favicon.png" alt="Directory"></div>
               <div class="col-6 text-end">
-                <h3 class="mb-0">Invoice 202009001</h3>
-                <p class="mb-0">Issued on Sep 01, 2020</p>
+                <h3 class="mb-0">서비스 결제 ${rVo.finalRequestNo }</h3>
+                <p class="mb-0">${today } </p>
               </div>
             </div>
           </div>
@@ -43,38 +40,38 @@
             <div class="row mb-4">
               <div class="col-sm-6 pe-lg-3">
                 <h2 class="h6 text-uppercase mb-4">Supplier</h2>
-                <h6 class="mb-1">Directory, Inc.</h6>
-                <p class="text-muted">13/25 New Avenue<br>New Heaven<br>45Y 73J<br>England<br><strong>Great Britain</strong></p>
+                <h6 class="mb-1">${expVo.name }</h6>
+                <p class="text-muted">${expVo.email }<br>${expInfoVo.empCount }회 고용<br>평점 ${expInfoVo.rate }<br></p>
               </div>
               <div class="col-sm-6 ps-lg-4">
                 <h2 class="h6 text-uppercase mb-4">Customer</h2>
-                <h6 class="mb-1">James Brown</h6>
-                <p class="text-muted">13/25 New Avenue<br>New Heaven<br>45Y 73J<br>England<br><strong>Great Britain</strong></p>
+                <h6 class="mb-1">${name }</h6>
+                <p class="text-muted">${email }<br></p>
               </div>
             </div>
             <div class="row mb-5">
               <div class="col-md-6 pe-lg-3 text-sm">
                 <div class="row">
                   <div class="col-6 text-uppercase text-muted">Bank account</div>
-                  <div class="col-6 text-end">hello@bootstrapious.com</div>
+                  <div class="col-6 text-end">${expVo.email }</div>
                 </div>
                 <div class="row">
                   <div class="col-6 text-uppercase text-muted">Reference</div>
-                  <div class="col-6 text-end">202009001</div>
+                  <div class="col-6 text-end"><fmt:formatDate value="${rVo.sendTime }" pattern="yyyy-MM-dd"/></div>
                 </div>
                 <div class="row">
                   <div class="col-6 text-uppercase text-muted">Payment method</div>
-                  <div class="col-6 text-end">Bank transfer</div>
+                  <div class="col-6 text-end">${expInfoVo.payMethod }</div>
                 </div>
               </div>
               <div class="col-md-6 ps-lg-4 text-sm">
                 <div class="row">
                   <div class="col-6 text-uppercase text-muted">Issued on</div>
-                  <div class="col-6 text-end">Sep 01, 2020</div>
+                  <div class="col-6 text-end">${today }</div>
                 </div>
                 <div class="row">
                   <div class="col-6 text-uppercase text-muted">Due on</div>
-                  <div class="col-6 text-end">Sep 01, 2020</div>
+                  <div class="col-6 text-end">${today}</div>
                 </div>
               </div>
             </div>
@@ -82,22 +79,22 @@
               <table class="table table-striped">
                 <thead class="bg-gray-200">
                   <tr class="border-0">
-                    <th class="center">#</th>
-                    <th>Item</th>
-                    <th>Description</th>
-                    <th class="text-end">Price</th>
-                    <th class="center">Qty</th>
-                    <th class="text-end">Total</th>
+                    <th class="center"></th>
+                    <th>서비스명</th>
+                    <th class="text-end">견적발송일</th>
+                    <th class="text-end">견적금액</th>
+                    <th class="text-end">할인금액</th>
+                    <th class="text-end">최종금액</th>
                   </tr>
                 </thead>
                 <tbody>
                   <tr>
                     <td class="text-center">1</td>
-                    <td class="fw-bold">Room Rental Services</td>
-                    <td>August</td>
-                    <td class="text-end">$958.00</td>
-                    <td class="text-center">1</td>
-                    <td class="text-end">$958.00</td>
+                    <td class="fw-bold">${categoryVo.main } ${categoryVo.detail }-${expVo.name }</td>
+                    <td class="text-end"><fmt:formatDate value="${rVo.sendTime }" pattern="yyyy년 MM월 dd일"/></td>
+                    <td class="text-end"><fmt:formatNumber value="${rVo.cost }" pattern="#,###"/> 원</td>
+                    <td class="text-end">-</td>
+                    <td class="text-end"><fmt:formatNumber value="${rVo.cost }" pattern="#,###"/> 원</td>
                   </tr>
                 </tbody>
               </table>
@@ -107,8 +104,8 @@
                 <table class="table">
                   <tbody>
                     <tr class="text-sm">
-                      <td class="fw-bold">상품가격</td>
-                      <td class="text-end">$1,058</td>
+                      <td class="fw-bold">최종 금액</td>
+                      <td class="text-end"><fmt:formatNumber value="${rVo.cost }" pattern="#,###"/> 원</td>
                     </tr>
                     <tr class="text-sm">
                       <td class="fw-bold">파밍페이</td>
@@ -123,23 +120,23 @@
 	                    		<label for="chk" style="font-size: 12px;" class="form-control">적용</label>
                     		</div>
                     	</td>
-                    	<td class="text-end"><span id="str" style="color: red; font-size: 12px;">사용가능합니다.</span></td>
+                    	<td class="text-end"><span class="text-warning" id="str" style="font-size: 12px;">사용가능합니다.</span></td>
                     </tr>
                     <tr>
                       <td class="text-uppercase fw-bold">Total</td>
                       <td class="text-end fw-bold" id="price">
-                      	<input type="hidden" value="8000" name="total" id="total">
+                      	<input type="hidden" value="100" name="total" id="total">
                       </td>
                      
                     </tr>
                   </tbody>
                 </table>
-                <div style="text-align: right;"><button class="btn btn-primary" onclick="iamport()" id="complete"><i class="far fa-credit-card"></i> 결제하기</button></div>
+                <div style="text-align: right;"><button class="btn btn-primary" onclick="iamport()" id="complete">결제하기</button></div>
               </div>
             </div>
           </div>
           <div class="card-footer bg-gray-100 p-5 px-print-0 border-0 text-end text-sm">
-            <p class="mb-0">Thank you for you business. Directory, Inc.</p>
+            <p class="mb-0">Thank you for you business.</p>
           </div>
         </div>
       </div>
@@ -148,7 +145,7 @@
 <script type="text/javascript">
 function iamport(){
 	let IMP = window.IMP;
-	IMP.init('imp46523158');
+	IMP.init('imp80823636');
 	IMP.request_pay({
 	    pg : 'html5_inicis',
 	    pay_method : 'card',
@@ -158,14 +155,14 @@ function iamport(){
 	    buyer_email : '${mVo.email}',
 	    buyer_name : '${mVo.name}',
 	    buyer_addr : '${mVo.address1}',
-	    buyer_postcode : ${mVo.zipCode}
+	    buyer_postcode : '${mVo.zipCode}'
 	}, function(rsp){
 		if(rsp.success){//결제 성공시
 			$.ajax({
 				url : "<c:url value='/payment/complete'/>",
 		        type :'POST',
 		        data : {"merchantUid" : rsp.merchant_uid,
-		        		"memberNo" : ${mVo.memberNo},
+		        		"memberNo" : '${mVo.memberNo}',
 		        		"memberName" : '${mVo.name}',
 		        		"price" : rsp.paid_amount,
 		        		"state" : "결제완료",
@@ -181,7 +178,7 @@ function iamport(){
 		        error : function( request, status, error) {
 	       			console.log("code : "+request.status+"\n"+"message : "+request.responseText);
 	       		}
-			})
+			});
 		}
 		else{//결제 실패시
 			var msg = '결제에 실패했습니다';
@@ -234,6 +231,5 @@ $(function(){
 			}
 		})
 	})
-})
+});
 </script>
-<%@ include file="../inc/bottom.jsp" %>

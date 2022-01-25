@@ -150,7 +150,7 @@
 		select c.main, c.detail, r.* from request r left join category c
 		on r.category_no=c.category_no
 		where member_no=#{memberNo}
-		order by request_no desc
+		order by request_no
 	</select>
 	
 	<select id="selectMyRequestDetail" parameterType="int" resultType="map">
@@ -171,6 +171,11 @@
 		<!-- <if test="detail!=null and detail!=''">
 			and detail=#{detail}
 		</if> --> 
+	</select>
+	
+	<select id="selectFinalDetail2" parameterType="int" resultType="finalRequestVo">
+		select * from final_request
+		where final_request_no=#{finalRequestNo}
 	</select>
 	
 	

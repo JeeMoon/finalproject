@@ -69,6 +69,11 @@
 		<if test="taxInvoice!=null and taxInvoice!=''">
 			tax_invoice=#{taxInvoice}
 		</if>
+		<if test="filename!=null and filename!=''">
+			filename=#{filename}
+			, originalname=#{originalname}
+			, filesize=#{filesize}
+		</if>
 		where expert_no=#{expertNo}
 	</update>
 </mapper>

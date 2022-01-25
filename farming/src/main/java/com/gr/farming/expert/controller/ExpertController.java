@@ -44,7 +44,6 @@ public class ExpertController {
 	private final CategoryService c_service;
 	private final OAuthService o_service;
 	private final FieldService f_service;
-	private final ResumeService r_service;
 	private final FindExpService fe_service;
 	
 	private final FileUploadUtil file;
@@ -58,12 +57,11 @@ public class ExpertController {
 
 	@Autowired
 	public ExpertController(ExpertService service, CategoryService c_service, OAuthService o_service, 
-      FieldService f_service, ResumeService r_service, FileUploadUtil file, FindExpService fe_service) {
+      FieldService f_service, FileUploadUtil file, FindExpService fe_service) {
 		this.service = service;
 		this.c_service = c_service;
 		this.o_service = o_service;
 		this.f_service = f_service;
-		this.r_service = r_service;
 		this.file = file;
 		this.fe_service = fe_service;
   }
@@ -265,7 +263,7 @@ public class ExpertController {
 	public String kakaoJoin() {
 		StringBuffer loginUrl = new StringBuffer();
         loginUrl.append("https://kauth.kakao.com/oauth/authorize?client_id=");
-        loginUrl.append("1036628c40962a9f65fae188105a4731"); 
+        loginUrl.append("56bf08692479c92a0298b16483f2071a"); 
         loginUrl.append("&redirect_uri=");
         loginUrl.append("http://localhost:9091/farming/login/expkakao"); 
         loginUrl.append("&response_type=code");

@@ -30,6 +30,7 @@ public class FileUploadUtil {
 		MultipartHttpServletRequest multiRequest = (MultipartHttpServletRequest) request;
 		
 		Map<String, MultipartFile> fileMap=multiRequest.getFileMap();
+		//List<MultipartFile> fileList=multiRequest.getFile("upfile"); //멀티플 쓸 때
 	
 		List<Map<String, Object>> list = new ArrayList<>();
 		
@@ -88,8 +89,8 @@ public class FileUploadUtil {
 			logger.info("type={}", ConstUtil.FILE_UPLOAD_TYPE);
 			
 			//실제 물리적인 경로 구하기
-			//application.getRealPath()
-			//config.getServletContext().getRealPath()
+			//application.getRealPath();
+			//config.getServletContext().getRealPath();
 			path=request.getSession().getServletContext().getRealPath(path);
 		}
 		

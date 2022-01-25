@@ -4,9 +4,6 @@ import java.io.IOException;
 import java.util.List;
 import java.util.Map;
 
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -18,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.gr.farming.common.ConstUtil;
 import com.gr.farming.common.FileUploadUtil;
@@ -97,41 +95,21 @@ public class FindExpController {
 	
 	
 	/* 전문가 상세페이지 수정 */
-	
 	@RequestMapping("/expDetailEdit")
 	public String expDetailEdit(@RequestParam(defaultValue="0") int expertNo,
-			HttpServletRequest request, Model model) {
+			Model model) {
 		
 		logger.info("전문가 상세페이지, 파라미터 expertNo={}", expertNo);
 		ExpertInfoVO expInfoVo=findExpService.selectExpInfo(expertNo);
-		ExpertVO expVo=findExpService.selectByExperNo(expertNo);
+		logger.info("전문가 상세페이지, 파라미터 expInfoVo={}", expInfoVo);
 		
-		//파일 업로드 처리
-//		String fileName="", originName="";
-//		long fileSize=0;
-//		int pathFlag=ConstUtil.UPLOAD_IMAGE_FLAG;
-//		try {
-//			List<Map<String, Object>> fileList 
-//				= fileUploadUtil.fileUpload(request, pathFlag);
-//			for(int i=0;i<fileList.size();i++) {
-//				 Map<String, Object> map=fileList.get(i);
-//				 
-//				 fileName=(String) map.get("fileName");
-//				 originName=(String) map.get("originalFileName");
-//				 fileSize=(long) map.get("fileSize");				 
-//			}
-//			
-//			logger.info("파일 업로드 성공, fileName={}", fileName);
-//		} catch (IllegalStateException e) {
-//			e.printStackTrace();
-//		} catch (IOException e) {
-//			e.printStackTrace();
-//		}
-//		
-//		//2
-//		expInfoVo.setImageVideo(fileName);
-//		expInfoVo.setOriginalFilename(originName);
-//		expInfoVo.setFilesize(fileSize);
+		if(expInfoVo==null) {
+			model.addAttribute("msg", "추가정보를 먼저 입력하세요.");
+			model.addAttribute("url", "/expert/addExp/addExp");
+			return "common/message";
+		}
+		
+		ExpertVO expVo=findExpService.selectByExperNo(expertNo);
 		
 		List<FieldDetailVO> fieldList=findExpService.selectFieldDetail(expertNo);
 		logger.info("전문가 expVo={}", expVo);
@@ -148,10 +126,38 @@ public class FindExpController {
 	@ResponseBody
 	@RequestMapping("/editExpInfo")
 	public ExpertInfoVO editExpInfo(@ModelAttribute ExpertInfoVO vo,
-			HttpServletRequest request) {
+			MultipartHttpServletRequest request) {
 		
 		logger.info("전문가 상세페이지 수정, 파라미터 vo={}", vo);
 		
+		//파일 업로드 처리
+		String fileName="", originName="", businessLicense="";
+		long fileSize=0;
+		int pathFlag=ConstUtil.UPLOAD_IMAGE_FLAG;
+		try {
+			List<Map<String, Object>> fileList 
+				= fileUploadUtil.fileUpload(request, pathFlag);
+			for(int i=0;i<fileList.size();i++) {
+				 Map<String, Object> map=fileList.get(i);
+				 
+				 fileName=(String) map.get("fileName");
+				 originName=(String) map.get("originalFileName");
+				 fileSize=(long) map.get("fileSize");
+			}
+			
+			logger.info("파일 업로드 성공, fileName={}", fileName);
+		} catch (IllegalStateException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		
+		//2
+		vo.setFilename(fileName);
+		vo.setOriginalname(originName);
+		vo.setFilesize(fileSize);
+		
+
 		///업로드 처리
 		/*String imageUrl="";
 		try {

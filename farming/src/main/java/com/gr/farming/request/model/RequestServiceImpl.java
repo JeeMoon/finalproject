@@ -117,6 +117,11 @@ public class RequestServiceImpl implements RequestService{
 		return requestDao.selectMyRequestAll(memberNo);
 	}
 
+	@Override
+	public FinalRequestVO selectFinalDetail2(int finalRequestNo) {
+		return requestDao.selectFinalDetail2(finalRequestNo);
+	}
+
 
 
 	

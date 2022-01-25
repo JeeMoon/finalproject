@@ -25,7 +25,7 @@
         <input type="hidden" name="memberNo" value="${mVo.memberNo}">
        <div class="row-1" style="width: 100%;">
          <div class="col-6 col-md-8 mb-30px" style="width: 80%">
-            <div class="card h-100 border-0 shadow hover-animate">
+            <div class="card h-100 border-0 shadow">
               <div class="card-body"  style="text-align: center;">
                 <div class="icon-rounded bg-secondary-light mb-3">
                   <i class="fas fa-user-alt fa-2x"></i>
@@ -103,7 +103,7 @@ $(function(){
 	$('#credit').click(function(){
 		var price = $('input[type=radio]:checked').val();
 		let IMP = window.IMP;
-		IMP.init('imp46523158');
+		IMP.init('imp80823636');
 		IMP.request_pay({
 		    pg : 'html5_inicis',
 		    pay_method : 'card',
@@ -113,7 +113,7 @@ $(function(){
 		    buyer_email : '${mVo.email}',
 		    buyer_name : '${mVo.name}',
 		    buyer_addr : '${mVo.address1}',
-		    buyer_postcode : ${mVo.zipCode}
+		    buyer_postcode : '${mVo.zipCode}'
 		}, function(rsp){
 			if(rsp.success){//결제 성공시
 				$.ajax({
@@ -121,7 +121,7 @@ $(function(){
 			        type :'POST',
 			        data : {"merchantUid" : rsp.merchant_uid,
 			        		"memberName" : '${mVo.name}',
-			        		"memberNo" : ${mVo.memberNo},
+			        		"memberNo" : '${mVo.memberNo}',
 			        		"price" : rsp.paid_amount,
 			        		"state" : "구매완료"},
 			        success: function(res){

@@ -34,7 +34,7 @@
               <div class="d-flex align-items-center mb-1 mb-lg-3">
                 <h2 class="h5 mb-0">${map["ROOM_NAME"] }</h2><img class="avatar avatar-sm avatar-border-white ms-3" src="<c:url value='/resources/userImg/defaultUser.jpg'/>" alt="전문가이미지">
               </div>
-              <span class="badge badge-pill p-2 badge-secondary-light">전문분야</span><a class="stretched-link" href="<c:url value='/chat/room?roomNo=${map["ROOM_NO"] }'/>"></a>
+              <span class="badge badge-pill p-2 badge-secondary-light">전문분야</span><a class="stretched-link" href="<c:url value='/chat/room?roomNo=${map["ROOM_NO"] }&finalRequestNo=${finalRequestNo }'/>"></a>
             </div>
             <div class="col-10 ms-auto col-lg-7">
               <div class="row">
@@ -52,12 +52,15 @@
       </c:if>
           
     </div>
+	<div class="col-lg-5">
+       <form method="post" action="<c:url value='/chat/create'/> ">
+           <input type="text" name="expertEmail" 
+           	placeholder="전문가의 이메일을 입력하고 채팅해보세요!" class="form-control mb-2">
+           <button class="btn btn-primary btn-create">상대와 채팅방 개설하기</button>
+       </form>
+   </div>
   </div>
 </section>
-        <form method="post" action="<c:url value='/chat/create'/> ">
-            <input type="text" name="expertEmail" value="${test }" class="form-control">
-            <button class="btn btn-secondary btn-create">상대와 채팅방 개설하기</button>
-        </form>
 <script type="text/javascript">
 $(document).ready(function(){
 
