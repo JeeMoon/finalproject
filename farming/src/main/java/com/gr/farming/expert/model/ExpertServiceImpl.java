@@ -118,6 +118,21 @@ public class ExpertServiceImpl implements ExpertService{
 	public int selectTotalRecord(SearchVO vo) {
 		return dao.selectTotalRecord(vo);
 	}
+	public int selectTotalRecords(SearchVO vo) {
+		return dao.selectTotalRecords(vo);
+	}	
+	public int selectTotalRecordss(SearchVO vo) {
+		return dao.selectTotalRecordss(vo);
+	}	
+	public int selectTotalRecordsss(SearchVO vo) {
+		return dao.selectTotalRecordsss(vo);
+	}	
+	public int selectTotalRecordssss(SearchVO vo) {
+		return dao.selectTotalRecordssss(vo);
+	}	
+	
+	
+	
 	public List<ExpertVO> select(){
 		return dao.select();
 	}

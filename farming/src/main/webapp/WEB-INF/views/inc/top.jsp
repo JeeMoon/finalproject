@@ -8,10 +8,17 @@
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
 <script>
 $(function(){	
-	$("input[name='category-options']").keydown(function(e) {
+	/* $("input[name='category-options']").keydown(function(e) {
 			if (e.keyCode == 13) {
 				location.href="../request/request";
 			}
+	}); */
+	$("#search_search").keydown(function(event){
+		var searchType = $("input[name='category-options']").val();
+		
+		console.log("searchType : "+searchType);
+		
+		self.location = "../request/request?categoryNo"+categoryNo;
 	});
 });
 </script>
