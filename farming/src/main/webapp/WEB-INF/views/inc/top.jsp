@@ -6,25 +6,15 @@
 <!DOCTYPE html>
 <meta charset="utf-8">
 <meta http-equiv="X-UA-Compatible" content="IE=edge">
-<!-- <script>
+<script>
 $(function(){	
-	
-	$('#search_search').change(function(){
-		$.ajax({
-			url: "<c:url value='/request/request'/>",
-			type: "GET",
-			data: {
-				"detail" : $(this).val(),
-				//"currentPage" : curPage
-			},
-			success:function(data){
-				pageFunc(curPage);
-				document.write(data);
+	$("input[name='category-options']").keydown(function(e) {
+			if (e.keyCode == 13) {
+				location.href="../request/request";
 			}
-		})
 	});
 });
-</script> -->
+</script>
 <title>파밍 - 가장 빠르게 스킬업하는 방법! 프리랜서, 레슨 전문가매칭서비스</title>
 
 <meta name="description" content="">
@@ -88,7 +78,7 @@ $(function(){
 								<input
 								class="form-control form-control-sm border-0 shadow-0 bg-gray-200"
 								id="search_search" placeholder="어떤 서비스가 필요하세요?" aria-label="Search"
-								type="search" style="width:700px" list="category-options">
+								type="search" style="width:700px" list="category-options" name="category-options">
 								<datalist id="category-options">
 									<option value="게임 개발" />
 									<option value="ios 개발" />

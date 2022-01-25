@@ -265,7 +265,7 @@ public class ExpertController {
 	public String kakaoJoin() {
 		StringBuffer loginUrl = new StringBuffer();
         loginUrl.append("https://kauth.kakao.com/oauth/authorize?client_id=");
-        loginUrl.append("1036628c40962a9f65fae188105a4731"); 
+        loginUrl.append("56bf08692479c92a0298b16483f2071a"); 
         loginUrl.append("&redirect_uri=");
         loginUrl.append("http://localhost:9091/farming/login/expkakao"); 
         loginUrl.append("&response_type=code");

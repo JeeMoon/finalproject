@@ -18,7 +18,7 @@ public class MvcConfiguration implements WebMvcConfigurer {
 
 		
 		 registry.addInterceptor(new LoginInterceptor())
-		 .addPathPatterns("/chat/*", "/member/mypage/*", "/qna/qnaList");
+		 .addPathPatterns("/chat/*", "/member/mypage/*", "/qna/qnaList", "/knowhow/reply");
 		 
 		 registry.addInterceptor(new LoginInterceptor())
 		 .addPathPatterns("/request/**", "/request/**", "/reviewWrite");
@@ -27,7 +27,7 @@ public class MvcConfiguration implements WebMvcConfigurer {
 		 .addPathPatterns("/expert/mypage/*", "/expert/addExp/*");
 		 
 		 registry.addInterceptor(new ExpLoginInterceptor())
-		 .addPathPatterns("/findexp/expDetailEdit", "/expert/mypage/*", "/expert/addExp/*");
+		 .addPathPatterns("/findexp/expDetailEdit", "/expert/mypage/*", "/expert/addExp/*", "/knowhow/edit", "/knowhow/delete");
 
 		
 	}
