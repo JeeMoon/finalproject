@@ -11,7 +11,7 @@ public interface ConstUtil {
 	
 	//이용후기 게시판 - 파일 저장 경로
 	String FILE_UPLOAD_PATH="review_upload";
-	String FILE_UPLOAD_PATH_TEST="/userImg";
+	String FILE_UPLOAD_PATH_TEST="/resources/userImg";
 
 	
 	//전문가 페이지 - 전문가 홍보이미지 등록시 저장 경로
