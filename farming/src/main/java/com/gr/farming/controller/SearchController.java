@@ -39,12 +39,5 @@ public class SearchController {
 		return "search/design";
 	}
 	
-	@RequestMapping("/Test")
-	public String Test() {
-		logger.info("Test");
-		return "search/Test";
-	}
-	
-	
 	
 }

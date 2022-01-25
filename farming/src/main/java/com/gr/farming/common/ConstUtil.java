@@ -11,12 +11,12 @@ public interface ConstUtil {
 	
 	//이용후기 게시판 - 파일 저장 경로
 	String FILE_UPLOAD_PATH="review_upload";
-	String FILE_UPLOAD_PATH_TEST="C:\\Users\\Asus\\git\\Farming\\farming\\src\\main\\webapp\\resources\\userImg";
+	String FILE_UPLOAD_PATH_TEST="/resources/userImg";
 
 	
 	//전문가 페이지 - 전문가 홍보이미지 등록시 저장 경로
 	String IMAGE_FILE_UPLOAD_PATH="exp_images";
-	String IMAGE_FILE_UPLOAD_PATH_TEST="C:\\Users\\Asus\\git\\Farming\\farming\\src\\main\\webapp\\resources\\userImg";
+	String IMAGE_FILE_UPLOAD_PATH_TEST="D:\\lecture\\workspace_list\\farming_ws\\Farming\\farming\\src\\main\\webapp\\resources\\userImg";
 	
 	//견적보내기 페이지 - 견적작성 완료시 첨부파일 이미지 저장 경로
 	String REQUSET_UPLOAD_PATH="request_images";
