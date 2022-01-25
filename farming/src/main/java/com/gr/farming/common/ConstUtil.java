@@ -16,7 +16,7 @@ public interface ConstUtil {
 	
 	//전문가 페이지 - 전문가 홍보이미지 등록시 저장 경로
 	String IMAGE_FILE_UPLOAD_PATH="exp_images";
-	String IMAGE_FILE_UPLOAD_PATH_TEST="/expImg";
+	String IMAGE_FILE_UPLOAD_PATH_TEST="C:\\Users\\DELL\\git\\Farming-re\\farming\\src\\main\\webapp\\resources\\userImg";
 	
 	//견적보내기 페이지 - 견적작성 완료시 첨부파일 이미지 저장 경로
 	String REQUSET_UPLOAD_PATH="request_images";
