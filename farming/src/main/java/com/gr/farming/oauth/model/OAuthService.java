@@ -49,7 +49,7 @@ public class OAuthService{
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
-			sb.append("&client_id=1036628c40962a9f65fae188105a4731"); // TODO REST_API_KEY 입력
+			sb.append("&client_id=56bf08692479c92a0298b16483f2071a"); // TODO REST_API_KEY 입력
 			sb.append("&redirect_uri=http://localhost:9091/farming/login/kakao"); // TODO 인가코드 받은 redirect_uri 입력
 			sb.append("&code=" + code);
 			bw.write(sb.toString());
@@ -249,12 +249,14 @@ public class OAuthService{
 			BufferedWriter bw = new BufferedWriter(new OutputStreamWriter(conn.getOutputStream()));
 			StringBuilder sb = new StringBuilder();
 			sb.append("grant_type=authorization_code");
-			sb.append("&client_id=1036628c40962a9f65fae188105a4731"); // TODO REST_API_KEY 입력
+			sb.append("&client_id=56bf08692479c92a0298b16483f2071a"); // TODO REST_API_KEY 입력
 			sb.append("&redirect_uri=http://localhost:9091/farming/login/expkakao"); // TODO 인가코드 받은 redirect_uri 입력
 			sb.append("&code=" + code);
 			bw.write(sb.toString());
 			bw.flush();
-
+			
+			/* 1036628c40962a9f65fae188105a4731 */
+			
 			int responseCode = conn.getResponseCode();
 			System.out.println("responseCode1 : " + responseCode);
 

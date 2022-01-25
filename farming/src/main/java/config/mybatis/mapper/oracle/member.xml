@@ -83,7 +83,27 @@
 		select count(*) from member
 		<!-- <include refid="searchWhere"></include>	 -->
 		
+	</select>	
+	
+	<select id="selectTotalRecords" parameterType="searchVo" resultType="int">
+		select count(*) from member
+		where To_char(regdate, 'YYYYMM') = '202111'
 	</select>
+
+	<select id="selectTotalRecordss" parameterType="searchVo" resultType="int">
+		select count(*) from member
+		where To_char(regdate, 'YYYYMM') = '202112'
+	</select>	
+	
+	<select id="selectTotalRecordsss" parameterType="searchVo" resultType="int">
+		select count(*) from member
+		where To_char(regdate, 'YYYYMM') = '202201'
+	</select>
+
+	<select id="selectTotalRecordssss" parameterType="searchVo" resultType="int">
+		select count(*) from member
+		where To_char(regdate, 'YYYYMM') = '202202'
+	</select>	
 	
 <!-- 	<select id="selectTotalRecords" parameterType="searchVo" resultType="int">
 			select count(*) from member

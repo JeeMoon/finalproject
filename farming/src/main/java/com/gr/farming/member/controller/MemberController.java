@@ -91,11 +91,13 @@ public class MemberController {
 	public String kakaoJoin() {
 		StringBuffer loginUrl = new StringBuffer();
 		loginUrl.append("https://kauth.kakao.com/oauth/authorize?client_id=");
-		loginUrl.append("1036628c40962a9f65fae188105a4731");
+		loginUrl.append("56bf08692479c92a0298b16483f2071a");
 		loginUrl.append("&redirect_uri=");
 		loginUrl.append("http://localhost:9091/farming/login/kakao");
 		loginUrl.append("&response_type=code");
-
+		/* 279193b01f43fe3112b1d771e2a83e5d */
+		/* REST API : 7ac2d421e29a3073ea120a1b75a0b671 */
+		/* 원래 값 : 1036628c40962a9f65fae188105a4731 */
 		return "redirect:" + loginUrl.toString();
 	}
 

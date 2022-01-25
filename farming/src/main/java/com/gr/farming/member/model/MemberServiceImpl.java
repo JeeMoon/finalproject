@@ -116,6 +116,18 @@ public class MemberServiceImpl implements MemberService{
 	public int selectTotalRecord(SearchVO vo) {
 		return memberDao.selectTotalRecord(vo);
 	}
+	public int selectTotalRecords(SearchVO vo) {
+		return memberDao.selectTotalRecords(vo);
+	}	
+	public int selectTotalRecordss(SearchVO vo) {
+		return memberDao.selectTotalRecordss(vo);
+	}	
+	public int selectTotalRecordsss(SearchVO vo) {
+		return memberDao.selectTotalRecordsss(vo);
+	}	
+	public int selectTotalRecordssss(SearchVO vo) {
+		return memberDao.selectTotalRecordssss(vo);
+	}	
 	public List<MemberVO> select(){
 		return memberDao.select();
 	}
