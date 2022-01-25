@@ -92,15 +92,50 @@ public class AdminController {
 
 		//[3] totalRecord 구하기
 		int memtotalRecord=mem_service.selectTotalRecord(searchVo);
+		
+		int memtotalRecords=mem_service.selectTotalRecords(searchVo);
+		int memtotalRecordss=mem_service.selectTotalRecordss(searchVo);
+		int memtotalRecordsss=mem_service.selectTotalRecordsss(searchVo);
+		int memtotalRecordssss=mem_service.selectTotalRecordssss(searchVo);
+		
 		int exptotalRecord=exp_service.selectTotalRecord(searchVo);
+		
+		int exptotalRecords=exp_service.selectTotalRecords(searchVo);
+		int exptotalRecordss=exp_service.selectTotalRecordss(searchVo);
+		int exptotalRecordsss=exp_service.selectTotalRecordsss(searchVo);
+		int exptotalRecordssss=exp_service.selectTotalRecordssss(searchVo);
+		
+		
 		pagingInfo.setTotalRecord(memtotalRecord);
+		
+		pagingInfo.setTotalRecord(memtotalRecords);
+		pagingInfo.setTotalRecord(memtotalRecordss);
+		pagingInfo.setTotalRecord(memtotalRecordsss);
+		pagingInfo.setTotalRecord(memtotalRecordssss);
+		
 		pagingInfo.setTotalRecord(exptotalRecord);
+		
+		pagingInfo.setTotalRecord(exptotalRecords);
+		pagingInfo.setTotalRecord(exptotalRecordss);
+		pagingInfo.setTotalRecord(exptotalRecordsss);
+		pagingInfo.setTotalRecord(exptotalRecordssss);
 		
 		//3. model에 결과 저장
 		model.addAttribute("list", list);
 		model.addAttribute("pagingInfo", pagingInfo);
 		model.addAttribute("memCount", memtotalRecord);
+		
+		model.addAttribute("memCounts", memtotalRecords);
+		model.addAttribute("memCountss", memtotalRecordss);
+		model.addAttribute("memCountsss", memtotalRecordsss);
+		model.addAttribute("memCountssss", memtotalRecordssss);
+		
 		model.addAttribute("expCount", exptotalRecord);
+		
+		model.addAttribute("expCounts", exptotalRecords);
+		model.addAttribute("expCountss", exptotalRecordss);
+		model.addAttribute("expCountsss", exptotalRecordsss);
+		model.addAttribute("expCountssss", exptotalRecordssss);
 		
 		List<MemberVO> mem_list = mem_service.selectAll(searchVo);
 		model.addAttribute("mem_list", mem_list);

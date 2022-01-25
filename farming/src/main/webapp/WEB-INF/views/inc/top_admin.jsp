@@ -41,10 +41,10 @@
       function drawChart() {
         var data = google.visualization.arrayToDataTable([
           ['month', '일반회원', '전문가'],
-          ['2021. 10',  0,      0],
-          ['2021. 11',  0,      0],
-          ['2021. 12',  2,      1],
-          ['2022. 01',  5,      8]
+          ['2021. 11',  ${memCounts},      ${expCounts}],
+          ['2021. 12',  ${memCountss},      ${expCountss}],
+          ['2022. 01',  ${memCountsss},      ${expCountsss}],
+          ['2022. 02',  ${memCountssss},      ${expCountssss}]
         ]);
 
         var options = {

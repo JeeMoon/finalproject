@@ -26,5 +26,9 @@ public interface ExpertDAO {
 	public int selectCategory(int expNo);
 	public int deleteExpert(int expertNo);
 	public int selectTotalRecord(SearchVO vo);
+	public int selectTotalRecords(SearchVO vo);
+	public int selectTotalRecordss(SearchVO vo);
+	public int selectTotalRecordsss(SearchVO vo);
+	public int selectTotalRecordssss(SearchVO vo);
 	public List<ExpertVO> select();
 }
