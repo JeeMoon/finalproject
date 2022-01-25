@@ -5,7 +5,7 @@
      <div class="container">
      	<ol class='breadcrumb ps-0  justify-content-start'>
           <li class='breadcrumb-item'><a href='<c:url value='/index'/>'>Home</a></li>
-          <li class='breadcrumb-item active'>전문가와 채팅</li>
+          <li class='breadcrumb-item active'>채팅</li>
         </ol>
       	<div class='d-flex flex-column flex-md-row justify-content-md-between align-items-md-center mb-4'>
           <c:if test="${user eq '사용자' }">
@@ -23,15 +23,17 @@
                 <div>
                   <h6> <a class='text-reset' href='detail-rooms.html'>견적서</a></h6>
                   <p class='text-muted text-sm mb-0'>내용</p>
-                  <div class='mt-n1'>상세내용</div>
-                </div><a href='detail-rooms.html'><img class='ms-3 rounded flex-shrink-0' src='<c:url value='/resources/img/'/>' alt='홍보사진' width='100'></a>
+                  <div class='mt-n1 mb-2'>${vo.explain }</div>
+                  <p class='text-muted text-sm mb-0'>비용</p>
+                  <div class='mt-n1 mb-2'><fmt:formatNumber value="${vo.cost }" pattern="#,###"/> 원</div>
+                </div><a href=''><i class="fas fa-arrow-circle-down"></i> 첨부파일</a>
               </div>
             </div>
             <div class='text-block pt-3 pb-0'>
-              <ul class='list-unstyled text-sm mb-0'>
-                <li class='mb-3'><i class='fas fa-users fa-fw text-muted me-2'></i>직원 수</li>
-                <li class='mb-3'><i class='far fa-calendar-check fa-fw text-muted me-2'></i>의뢰기간</li>
-                <li class='mb-0'><i class='far fa-calendar fa-fw text-muted me-2'></i>현재날짜<i class='fas fa-arrow-right fa-fw text-muted mx-3'></i>의뢰기간+현재날짜</li>
+              <ul class='list-unstyled  mb-0'>
+                <li class='mb-3'><i class='fas fa-users fa-fw text-muted me-2'></i>직원 수  <strong>${expInfo.staff }</strong></li>
+                <li class='mb-3'><i class='far fa-calendar-check fa-fw text-muted me-2'></i>의뢰기간  <strong><fmt:formatDate value="${vo.sendTime }" pattern="yy-MM-dd HH:mm:ss"/> </strong></li>
+                <!-- <li class='mb-0'><i class='far fa-calendar fa-fw text-muted me-2'></i>현재날짜<i class='fas fa-arrow-right fa-fw text-muted mx-3'></i>의뢰기간+현재날짜</li> -->
                 <c:if test="${user eq '전문가' }">
                 	<li><input class="btn btn-primary" type="button" value="결제요청" style="float: right;" id="request"></li>
               	</c:if>
@@ -53,7 +55,7 @@
       <div class='px-4 py-5'>
           <div class='row'>
           
-			<div id="msgArea" style="overflow:auto; width:100%; height: 650px;">
+			<div id="msgArea" style="overflow:auto; width:100%; height: 500px;">
 				<c:if test="${!empty dtoList }">
 					<c:forEach var="dto" items="${dtoList }">
 						<c:if test="${dto.writer eq name }">
@@ -97,7 +99,7 @@
 $(document).ready(function(){
 	var userNo = $('#userNo').val();
 	$('#credit').click(function(){
-		window.open("<c:url value='/payment/paymentDetail'/>", "서비스결제", "height=" + screen.height + ",width=" + screen.width + "fullscreen=yes");
+		window.open("<c:url value='/payment/paymentDetail?finalRequestNo="+${room.finalRequestNo}+"'/>", "서비스결제", "height=" + screen.height + ",width=" + screen.width + "fullscreen=yes");
 	});
 	
 	function pdDetail(){

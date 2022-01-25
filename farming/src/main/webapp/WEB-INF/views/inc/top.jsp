@@ -189,7 +189,6 @@ $(function(){
 								data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 									<img class="avatar avatar-sm avatar-border-white ms-2" style="margin-right:1.3rem"
 										src="${pageContext.request.contextPath }/resources/userImg/${userImg}"></a>
-								<!-- 프로필 이미지로 변경예정 -->
 									<div class="dropdown-menu dropdown-menu-end" aria-labelledby="docsDropdownMenuLink">
 										<h6 class="dropdown-header fw-normal">${name } 전문가님</h6>
 											<a class="dropdown-item" href="docs/docs-introduction.html">파밍페이</a>

@@ -22,7 +22,11 @@ import com.gr.farming.community.model.ChatRoomRepository;
 import com.gr.farming.community.model.ChatService;
 import com.gr.farming.expert.model.ExpertService;
 import com.gr.farming.expert.model.ExpertVO;
+import com.gr.farming.findExp.model.ExpertInfoVO;
+import com.gr.farming.findExp.model.FindExpService;
 import com.gr.farming.member.model.MemberService;
+import com.gr.farming.request.model.FinalRequestVO;
+import com.gr.farming.request.model.RequestService;
 
 import lombok.RequiredArgsConstructor;
 import lombok.extern.log4j.Log4j2;
@@ -42,6 +46,10 @@ public class RoomController {
     private ExpertService e_service;
     @Autowired
     private MemberService m_service;
+    @Autowired
+    private RequestService r_service;
+    @Autowired
+    private FindExpService fe_service;
     
     //채팅방 목록 조회
     /*
@@ -87,8 +95,11 @@ public class RoomController {
     }
 	*/
     @RequestMapping("/create")
-    public String createRoom(@RequestParam(value="expertEmail", required=false) String expertEmail, HttpSession session, Model model) {
+    public String createRoom(@RequestParam(value="expertEmail", required=false) String expertEmail, 
+    		int finalRequestNo, HttpSession session, Model model) {
     	log.info("채팅방 만들기 (상담전문가email)expertEmail = {}", expertEmail);
+    	
+    	FinalRequestVO finalRequest=r_service.selectFinalDetail2(finalRequestNo);
     	
     	int memNo = (int) session.getAttribute("userNo");
     	ExpertVO eVo = e_service.selectByEmail(expertEmail);
@@ -96,6 +107,8 @@ public class RoomController {
     	
     	ChatRoomDTO roomDto = new ChatRoomDTO();
     	roomDto.setRoomName(expName);
+    	roomDto.setRequestNo(finalRequest.getRequestNo());
+    	roomDto.setFinalRequestNo(finalRequestNo);
     	
     	int cnt = service.createRoom(roomDto);
     	
@@ -139,10 +152,19 @@ public class RoomController {
     public String getRoom(int roomNo, Model model){
         log.info("# get Chat Room, roomNo : " + roomNo);
         
+        ChatRoomDTO room=service.selectRoomNo(roomNo);
+        FinalRequestVO vo=r_service.selectFinalDetail2(room.getFinalRequestNo());
+        log.info("# 최종견적서 vo={} ", vo);
+        
+        ExpertInfoVO expInfo=fe_service.selectExpInfo(vo.getExpertNo());
+        log.info("# 전문가정보 expInfo={} ", expInfo);
+        
         List<ChatMessageDTO> dtoList = service.selectMessageDTO(roomNo);
         
         model.addAttribute("room", service.selectRoomNo(roomNo));
         model.addAttribute("dtoList", dtoList);
+        model.addAttribute("vo", vo);
+        model.addAttribute("expInfo", expInfo);
         
         return "chat/room";
     }

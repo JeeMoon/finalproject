@@ -22,6 +22,8 @@ public class ChatRoomDTO {
 
     private int roomNo;
     private String roomName;
+    private int requestNo;
+    private int finalRequestNo;
 
     public static ChatRoomDTO create(String name){
         ChatRoomDTO room = new ChatRoomDTO();

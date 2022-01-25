@@ -33,7 +33,7 @@
 	        </div>
            <c:forEach var="map" items="${list }">
             <div class="list-group mb-4"> 
-	         <a class="list-group-item list-group-item-action p-4" href="<c:url value=''/>">
+	         <a class="list-group-item list-group-item-action p-4" href="<c:url value='/chat/create?expertEmail=${map[\'EMAIL\'] }&finalRequestNo=${map[\'FINAL_REQUEST_NO\'] }'/>">
               <div class="row mb-3">
                 <div class="col-sm-9">
                   <h5>${map['NAME'] }</h5>

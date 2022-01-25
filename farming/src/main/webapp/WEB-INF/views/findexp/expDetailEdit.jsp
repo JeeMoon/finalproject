@@ -14,8 +14,9 @@ href="${pageContext.request.contextPath }/resources/css/request.css">
 #btEdit5 + .select_box{display:none}
 #btEdit6 + .select_box{display:none}
 #btEdit7 ~ ul{display:none}
-#btEdit8 ~ label{display:none}
+#btEdit8 ~ ul{display:none}
 #btEdit9 + .radio_box{display:none}
+#btEdit10 ~ ul{display:none}
 
 .select_box{
  	position:relative;
@@ -32,6 +33,7 @@ href="${pageContext.request.contextPath }/resources/css/request.css">
      	background: url(${pageContext.request.contextPath }/resources/img/arrow-down-sign-to-navigate.png) 96% center no-repeat;
 	background-size: 10px;    		
 }    
+
 </style>
 
 <section>
@@ -83,7 +85,7 @@ href="${pageContext.request.contextPath }/resources/css/request.css">
 	          <div class="map-wrapper-300 mb-3">
 	         	  <input type="hidden" id="address" value="${expVo.address1}">
 	            <div class="h-100 " id="map"></div>
-	        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=ff1949cec1418c92938f079cf57f3c3e&libraries=services"></script>
+	        <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=17ab27a9b343549c3f2b304d54c5e1a7&libraries=services"></script>
 			<script type="text/javascript">
 				var mapContainer = document.getElementById('map'), // 지도를 표시할 div 
 			    mapOption = {
@@ -229,12 +231,15 @@ href="${pageContext.request.contextPath }/resources/css/request.css">
 	            <p class="text-body small">허위정보에 대한 모든 책임은 본인에게 있습니다</p>
            		<ul class="list-inline">
         			<li class="list-inline-item listfl wh80">
-	          			<label class="file-uploader w-100 h-100" >
-		            		<input class="file-uploader-input" type="file" name="businessLicense" id="businessLicense" onchange="readURL(this);" >
-		           			<span class="slot-content"></span>
+	          			<label class="file-uploader w-100 h-100">
+	          				<a href="javascript:" onclick="fileUploadAction();" class="btn">  </a>
+		            		<input class="file-uploader-input" type="file" name="businessLicense" 
+		            			id="input_imgs" />
+		           			<span class="slot-content" ></span>
 		           		</label>
 	           		</li>
-	           		<li class="list-inline-item wh80" id="image_container">
+	           		<li class="list-inline-item imgs_wrap" >
+	           			<img id="img" />
 	           		</li>
            		</ul> 
 	           	<c:if test="${infoVo.businessLicense!='N'}">
@@ -250,11 +255,19 @@ href="${pageContext.request.contextPath }/resources/css/request.css">
 	          	<a id="btEdit8" class="mb-2 text-primary col-md-4 d-md-flex align-items-center justify-content-end"
 	          		>수정</a>
 	          	<p class="text-body small">허위정보에 대한 모든 책임은 본인에게 있습니다</p>
-	          	<label class="file-uploader" style="width: 80px; height: 80px;">
-            		<input class="file-uploader-input" type="file" name="businessLicense" id="businessLicense">
-           			<span class="slot-content"></span>
-           		</label>
-	          	<div class="imgBox"></div>
+	          	<ul class="list-inline">
+        			<li class="list-inline-item listfl wh80">
+	          			<label class="file-uploader w-100 h-100">
+	          				<a href="javascript:" onclick="fileUploadAction();" class="btn">  </a>
+		            		<input class="file-uploader-input" type="file" name="license" 
+		            			id="input_imgs"  multiple />
+		           			<span class="slot-content" ></span>
+		           		</label>
+	           		</li>
+	           		<li class="list-inline-item imgs_wrap" >
+	           			<img id="img" />
+	           		</li>
+           		</ul>
 	          	<c:if test="${!empty infoVo.license}">	
 	           	<input class="form-control mb-sm-4" type="text" name="license" value="${infoVo.license }">
 	            <p id="infoBox8" class="text-muted fw-light">${infoVo.license}</p>
@@ -281,15 +294,25 @@ href="${pageContext.request.contextPath }/resources/css/request.css">
 	         </div>
 	         
 	         <!-- 10. 이미지 업로드 -->
-	         <div class="text-block">
-	           <h5 class="mb-4">사진</h5>
-	           <div class="row gallery mb-3 ms-n1 me-n1">
-	             <div class="col-lg-4 col-6 px-1 mb-2"><a href="${pageContext.request.contextPath }/resources/img/photo/photo-1426122402199-be02db90eb90.jpg" data-fancybox="gallery" title="Our street"><img class="img-fluid" src="${pageContext.request.contextPath }/resources/img/photo/photo-1426122402199-be02db90eb90.jpg" alt="..."></a></div>
-	             <div class="col-lg-4 col-6 px-1 mb-2"><a href="${pageContext.request.contextPath }/resources/img/photo/photo-1512917774080-9991f1c4c750.jpg" data-fancybox="gallery" title="Outside"><img class="img-fluid" src="${pageContext.request.contextPath }/resources/img/photo/photo-1512917774080-9991f1c4c750.jpg" alt="..."></a></div>
-	             <div class="col-lg-4 col-6 px-1 mb-2"><a href="${pageContext.request.contextPath }/resources/img/photo/photo-1494526585095-c41746248156.jpg" data-fancybox="gallery" title="Rear entrance"><img class="img-fluid" src="${pageContext.request.contextPath }/resources/img/photo/photo-1494526585095-c41746248156.jpg" alt="..."></a></div>
-	             <div class="col-lg-4 col-6 px-1 mb-2"><a href="${pageContext.request.contextPath }/resources/img/photo/photo-1484154218962-a197022b5858.jpg" data-fancybox="gallery" title="Kitchen"><img class="img-fluid" src="${pageContext.request.contextPath }/resources/img/photo/photo-1484154218962-a197022b5858.jpg" alt="..."></a></div>
-	             <div class="col-lg-4 col-6 px-1 mb-2"><a href="${pageContext.request.contextPath }/resources/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" data-fancybox="gallery" title="Bedroom"><img class="img-fluid" src="${pageContext.request.contextPath }/resources/img/photo/photo-1522771739844-6a9f6d5f14af.jpg" alt="..."></a></div>
-	             <div class="col-lg-4 col-6 px-1 mb-2"><a href="${pageContext.request.contextPath }/resources/img/photo/photo-1488805990569-3c9e1d76d51c.jpg" data-fancybox="gallery" title="Bedroom"><img class="img-fluid" src="${pageContext.request.contextPath }/resources/img/photo/photo-1488805990569-3c9e1d76d51c.jpg" alt="..."></a></div>
+	         <div class="text-block row">
+	           <h5 class="mb-2 col-md-8">사진</h5>
+	           <a id="btEdit10" class="mb-2 text-primary col-md-4 d-md-flex align-items-center justify-content-end"
+	          		>수정</a>
+	           <p class="text-body small">홍보용 이미지를 업로드하세요</p>
+	           <ul class="list-inline">
+	       			<li class="list-inline-item listfl wh80">
+	          			<label class="file-uploader w-100 h-100">
+	          				<a href="javascript:" onclick="fileUploadAction();" class="btn">  </a>
+		            		<input class="file-uploader-input" type="file" name="imageUpload" 
+		            			id="input_imgs"  multiple />
+		           			<span class="slot-content" ></span>
+		           		</label>
+	           		</li>
+	           		<li class="list-inline-item imgs_wrap" >
+	           			<img id="img" />
+	           		</li>
+          		</ul> 
+	           <div class="row gallery mb-3 ms-n1 me-n1" id="infoBox10" >
 	           </div>
 	         </div>
          </div>
@@ -313,7 +336,8 @@ href="${pageContext.request.contextPath }/resources/css/request.css">
               <hr class="my-4">
 	            <p class="text-muted text-sm text-center">단골손님에세 링크를 보내 리뷰를 모으세요! 파밍고객님이 아니여도 후기를 남길 수 있습니다.</p>
               <div class="d-grid mb-4">
-                <button class="btn btn-primary btn-lg" type="submit">링크 복사하기</button>
+              	<input type="hidden" id = "ShareUrl">
+                <button class="btn btn-primary btn-lg" onclick="CopyUrlToClipboard()" type="button">링크 복사하기</button>
               </div>
             </form>
             <hr class="my-4">
@@ -326,20 +350,117 @@ href="${pageContext.request.contextPath }/resources/css/request.css">
       </div>
     </div>
    </c:if>
-<script>
+<script> 
+
+	function CopyUrlToClipboard(){
+		
+		var obShareUrl = document.getElementById("ShareUrl");
+		//obShareUrl.value = window.document.location.href;  // 현재 URL 을 세팅해 줍니다.
+		obShareUrl.value = "http://localhost:9091/farming/findexp/expDetail?expertNo=17";
+		console.log(obShareUrl.value);
+		
+		obShareUrl.select();  // 해당 값이 선택되도록 select() 합니다
+		document.execCommand("copy"); // 클립보드에 복사합니다.
+	
+		obShareUrl.blur(); // 선택된 것을 다시 선택안된것으로 바꿈니다.
+		alert("URL이 클립보드에 복사되었습니다"); 
+	}
+
+	//첨부파일 1개
 	function readURL(input) {
-		  var reader = new FileReader();
-		  reader.onload = function(e) {
-			var img = document.createElement('img');
-			img.setAttribute("src", event.target.result);
-			img.setAttribute("class", "thumb w-100 h-100");
-			document.querySelector("#image_container").appendChild(img);
-		  };
-		  reader.readAsDataURL(event.target.files[0]);
+	  var reader = new FileReader();
+	  reader.onload = function(e) {
+		  var html = "<div class=\"position-relative listfl\">";
+		  html += "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"delete_id_"+index+"\" class='delete' style=\"background-image:url(${pageContext.request.contextPath }/resources/img/delete.svg)\"></a>";
+			html += "<img src=\""+e.target.result+"\" data-file='"+f.name+"' class='selProductFile thumb wh80' id=\"img_id_"+index+"\" title='Click to remove'><div>";
+			$(this).find(".image_container").append(html);
+	  };
+	  reader.readAsDataURL(event.target.files[0]);
 	} 	
 	
+	//첨부파일 multiple
+	var sel_files = [];
+	
+	$(function(){
+		$("#input_imgs").on("change", handleImgFileSelect);
+	})
+	
+	function fileUploadAction(){
+		console.log("fileUploadAction");
+		$("#input_imgs").trigger('click');
+	}
+	
+	function handleImgFileSelect(e){
+		sel_files=[];
+		$(".imgs_wrap").empty();
+		
+		var files = e.target.files;
+		var filesArr = Array.prototype.slice.call(files);
+		console.log(files);
+		console.log(filesArr);
+		
+		var index = 0;
+		filesArr.forEach(function(f){
+			if(!f.type.match("image.*")){
+				alert("확장자는 이미지확장자만 가능합니다.");
+				return;
+			}
+			
+			sel_files.push(f);
+			
+			var reader = new FileReader();
+			reader.onload = function(e){
+				var html = "<div class=\"position-relative listfl\">";
+				html += "<a href=\"javascript:void(0);\" onclick=\"deleteImageAction("+index+")\" id=\"delete_id_"+index+"\" class='delete' style=\"background-image:url(${pageContext.request.contextPath }/resources/img/delete.svg)\"></a>";
+				html += "<img src=\""+e.target.result+"\" data-file='"+f.name+"' class='selProductFile thumb wh80' id=\"img_id_"+index+"\" title='Click to remove'><div>";
+				$(".imgs_wrap").append(html);
+				index++;
+			}
+			reader.readAsDataURL(f);
+		});
+	}
+	
+	function deleteImageAction(index){
+		console.log("index : "+index);
+		sel_files.splice(index, 1);
+		
+		var img_id = "#img_id_" + index;
+		var del_id = "#delete_id_" + index;
+		$(img_id).remove();
+		$(del_id).remove();
+		
+		console.log(sel_files);
+	}
+	
+	//프로필 수정 ajax
 	$(function(){
 		textchange=false;
+		
+		$('#btEdit10').click(function(){
+			if(textchange){
+				textchange=false;
+				$(this).text('수정');
+			}else{
+				textchange=true;
+				$(this).text('저장');
+				$(this).click(function(){s
+					$.ajax({
+						url:'<c:url value="/findexp/editExpInfo"/>',
+						type:"POST",
+						data:{
+							filename : $('input[name=imageUpload]').val(),
+							expertNo : $('input[name=expertNo]').val()
+						},success: function(res){
+							$('#infoBox10').text(res.filename);
+						}
+					});
+				})
+			} 
+			$(this).siblings('ul').toggle();
+			$(this).siblings('div#infoBox10').toggle();
+		}); 
+		
+		
 		$('#btEdit1').click(function(){
 			if(textchange){
 				textchange=false;
@@ -509,7 +630,7 @@ href="${pageContext.request.contextPath }/resources/css/request.css">
 				})
 			}
 			$(this).siblings('ul').toggle();
-			//$(this).siblings('p').toggle();
+			$(this).siblings('div#infoBox10').toggle();
 		});
 		$('#btEdit8').click(function(){
 			if(textchange){
@@ -532,7 +653,7 @@ href="${pageContext.request.contextPath }/resources/css/request.css">
 				})
 			}
 			$(this).siblings('label').toggle();
-			//$(this).siblings('p').toggle();
+			$(this).siblings('div#infoBox10').toggle();
 		});
 		
 		$('#btEdit9').click(function(){
@@ -563,10 +684,7 @@ href="${pageContext.request.contextPath }/resources/css/request.css">
 			$(this).siblings('p').toggle();
 		});
 		
-		$('#time').timepicker();
+		
 	});
 </script>
-<script src='https://code.jquery.com/jquery-3.6.0.slim.min.js' integrity='sha256-u7e5khyithlIdTpu22PHhENmPcRdFiHRjhAuHcs05RI=' crossorigin='anonymous'></script>
-<script src="${pageContext.request.contextPath }/resources/js/qcTimepicker.js"></script>
-<script src="${pageContext.request.contextPath }/resources/js/timepicker.js"></script>  
 <%@ include file="../inc/bottom.jsp" %>

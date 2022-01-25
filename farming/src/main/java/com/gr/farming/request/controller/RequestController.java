@@ -161,6 +161,13 @@ public class RequestController {
 			, HttpSession session, Model model) {
 		
 		int expertNo=(int) session.getAttribute("userNo");
+		ExpertInfoVO expInfoVo=findExpService.selectExpInfo(expertNo);
+		if(expInfoVo==null) {
+			model.addAttribute("msg", "추가정보를 먼저 입력하세요.");
+			model.addAttribute("url", "/expert/addExp/addExp");
+			return "common/message";
+		}
+		
 		fieldSearchVo.setUserNo(expertNo);
 		logger.info("받은 요청 페이지 - 파라미터 fieldSearchVo={}", fieldSearchVo);
 		

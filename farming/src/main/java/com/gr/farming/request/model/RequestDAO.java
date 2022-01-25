@@ -41,5 +41,6 @@ public interface RequestDAO {
 	//받은 견적 조회(회원)
 	List<Map<String, Object>> selectFinalDetail(int requestNo);
 	Map<String, Object> selectMyRequestDetail(int requestNo);
+	FinalRequestVO selectFinalDetail2(int finalRequestNo);
 	
 }
